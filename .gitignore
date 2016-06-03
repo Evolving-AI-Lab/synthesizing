@@ -1,3 +1,6 @@
+# Caffe models
+*.caffemodel
+
 # Images
 *.JPEG
 *.jpg
