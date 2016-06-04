@@ -6,12 +6,11 @@ This repository contains source code necessary to reproduce some of the main res
 
 **If you use this software in an academic article, please cite:**
 
-    @inproceedings{nguyen2015deep,
-      title={Deep Neural Networks are Easily Fooled: High Confidence Predictions for Unrecognizable Images},
-      author={Nguyen, Anh and Yosinski, Jason and Clune, Jeff},
-      booktitle={Computer Vision and Pattern Recognition (CVPR), 2015 IEEE Conference on},
-      year={2015},
-      organization={IEEE}
+    @article{nguyen2016synthesizing,
+      title={Synthesizing the preferred inputs for neurons in neural networks via deep generator networks},
+      author={Nguyen, Anh and Dosovitskiy, Alexey and Yosinski, Jason and Brox, Thomas and Clune, Jeff},
+      journal={arXiv preprint arXiv:1605.09304},
+      year={2016}
     }
 
 For more information regarding the paper, please visit www.evolvingai.org/fooling
