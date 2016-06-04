@@ -39,8 +39,10 @@ fi
 
 # Output dir
 output_dir="output"
-rm -rf ${output_dir}
-mkdir ${output_dir}
+# rm -rf ${output_dir}
+mkdir -p ${output_dir}
+
+list_files=""
 
 # Running optimization across a sweep of hyperparams
 for unit in ${units}; do
@@ -90,3 +92,11 @@ for unit in ${units}; do
   
   done
 done
+
+# Make a collage
+output_file=${output_dir}/example1.jpg
+montage ${list_files} -tile 5x1 -geometry +1+1 ${output_file}
+convert ${output_file} -trim ${output_file}
+echo "=============================="
+echo "Result of example 4: [ ${output_file} ]"
+
