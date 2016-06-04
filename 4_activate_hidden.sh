@@ -87,8 +87,8 @@ for unit in ${units}; do
 done
 
 # Make a collage
-output_file=${output_dir}/example2.jpg
+output_file=${output_dir}/example4.jpg
 montage ${list_files} -tile 5x1 -geometry +1+1 ${output_file}
 convert ${output_file} -trim ${output_file}
 echo "=============================="
-echo "Result of example 2: [ ${output_file} ]"
+echo "Result of example 4: [ ${output_file} ]"
