@@ -13,4 +13,4 @@ This repository contains source code necessary to reproduce some of the main res
       year={2016}
     }
 
-For more information regarding the paper, please visit www.evolvingai.org/fooling
+For more information regarding the paper, please visit www.evolvingai.org/synthesizing
