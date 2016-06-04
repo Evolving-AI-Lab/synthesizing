@@ -96,7 +96,7 @@ def make_step_generator(net, x, x0, start, end, step_size=1):
   return grad_norm, src.data[:].copy()
 
 
-def make_step_net(net, image, xy=0, step_size=1, end='fc8', unit=None):
+def make_step_net(net, end, unit, image, xy=0, step_size=1):
   '''
   Forward and backward passes through the DNN being visualized.
   '''
@@ -221,7 +221,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
 
       # 2. forward pass the image x0 to net to maximize an unit k
       # 3. backprop the gradient from net to the image to get an updated image x
-      grad_norm_net, x, act = make_step_net(net, cropped_x0, xy, step_size, end=layer, unit=unit)
+      grad_norm_net, x, act = make_step_net(net=net, end=layer, unit=unit, image=cropped_x0, xy=xy, step_size=step_size)
 
       # Convert from BGR to RGB
       x = x[:,::-1, :, :]
@@ -238,7 +238,8 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
       # 5. backprop the image to generator to get an updated code
-      grad_norm_generator, updated_code = make_step_generator(net=generator, x=updated_x0, x0=x0, start=gen_in_layer, end=gen_out_layer, step_size=step_size)
+      grad_norm_generator, updated_code = make_step_generator(net=generator, x=updated_x0, x0=x0, 
+          start=gen_in_layer, end=gen_out_layer, step_size=step_size)
 
       # Clipping code
       if clip:
