@@ -50,7 +50,7 @@ We provide here four different examples:
 * Here, the `debug` option is enabled, so one can see the activations of intermediate images. The script produces:
 
 <p align="center">
-    <img src="examples/example2.jpg" width=500px>
+    <img src="examples/example3.jpg" width=600px>
 </p>
 
 
