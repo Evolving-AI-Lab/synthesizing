@@ -192,7 +192,6 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
   assert_array_equal(src.data.shape, code.shape)
 
   # src.data is the image x that we optimize
-  # code = code[np.newaxis]
   src.data[:] = code.copy()[:]
 
   # Initialize an empty result
@@ -296,7 +295,7 @@ def write_label(filename, act):
 def main():
 
   parser = argparse.ArgumentParser(description='Process some integers.')
-  parser.add_argument('--unit', metavar='unit', type=int, help='fc8 unit within [0, 999]')
+  parser.add_argument('--unit', metavar='unit', type=int, help='an unit to visualize e.g. [0, 999]')
   parser.add_argument('--n_iters', metavar='iter', type=int, default=10, help='Number of iterations')
   parser.add_argument('--L2', metavar='w', type=float, default=1.0, nargs='?', help='L2 weight')
   parser.add_argument('--lr', metavar='lr', type=float, default=2.0, nargs='?', help='Learning rate')
@@ -307,8 +306,8 @@ def main():
   parser.add_argument('--act_layer', metavar='s', type=str, default="fc8", help='Layer at which we activate a neuron')
   parser.add_argument('--init_file', metavar='s', type=str, default="", help='Init image')
   parser.add_argument('--debug', metavar='b', type=int, default=0, help='Print out the images or not')
-  parser.add_argument('--clip', metavar='b', type=int, default=0, help='Clip out the code range to be in N(0,1)')
-  parser.add_argument('--bound', metavar='b', type=str, default="", help='The file to an array that is the upper bound for optimization range')
+  parser.add_argument('--clip', metavar='b', type=int, default=0, help='Clip out within a code range')
+  parser.add_argument('--bound', metavar='b', type=str, default="", help='The file to an array that is the upper bound for activation range')
   parser.add_argument('--output_dir', metavar='b', type=str, default=".", help='Output directory for saving results')
 
   args = parser.parse_args()
@@ -347,9 +346,10 @@ def main():
   # networks
   generator = caffe.Net(settings.generator_definition, settings.generator_weights, caffe.TEST)
   net = caffe.Classifier(settings.net_definition, settings.net_weights,
-               mean = mean, # ImageNet mean, training set dependent
+               mean = mean, # ImageNet mean
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
+  # shape of the code being optimized
   shape = generator.blobs['feat'].data.shape
 
   # Fix the seed
@@ -365,6 +365,7 @@ def main():
   # Load the activation range
   upper_bound = lower_bound = None
 
+  # Set up clipping bounds
   if args.bound != "":
     n_units = shape[1]
     upper_bound = np.loadtxt(args.bound, delimiter=' ', usecols=np.arange(0, n_units), unpack=True)
@@ -373,12 +374,12 @@ def main():
     # Lower bound of 0 due to ReLU
     lower_bound = np.zeros(start_code.shape)
 
-  # generate class visualization via octavewise gradient ascent
+  # Optimize a code via gradient ascent
   output_image = activation_maximization(net, generator, 'feat', start_code, phases, 
             clip=args.clip, unit=args.unit, xy=args.xy, debug=args.debug,
             upper_bound=upper_bound, lower_bound=lower_bound)
 
-  # save image
+  # Save image
   filename = "%s/%s_%s_%s_%s_%s__%s.jpg" % (
       args.output_dir,
       args.act_layer, 
