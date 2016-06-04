@@ -16,7 +16,7 @@ xy=0
 
 # Net
 net_weights="nets/placesCNN/places205CNN_iter_300000.caffemodel"
-net_definition="nets/placesCNN/places205CNN_deploy.prototxt"
+net_definition="nets/placesCNN/places205CNN_deploy_updated.prototxt"
 
 # Hyperparam settings for visualizing AlexNet
 iters="200"
