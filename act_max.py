@@ -321,8 +321,6 @@ def main():
   if args.end_lr < 0:
     args.end_lr = args.start_lr
 
-
-
   # which neuron to visualize
   print "-------------"
   print " unit: %s  xy: %s" % (args.unit, args.xy)
