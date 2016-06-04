@@ -16,11 +16,17 @@ This repository contains source code necessary to reproduce some of the main res
 For more information regarding the paper, please visit www.evolvingai.org/synthesizing
 
 ## Setup
+
+### Installing software
 This code is built on top of Caffe. You'll need to install the following:
 * Install Caffe; follow the official [installation instructions](http://caffe.berkeleyvision.org/installation.html).
 * Build the Python bindings for Caffe
 * If you have an NVIDIA GPU, you can optionally build Caffe with the GPU option to make it run faster
-* Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) CLI on your system
+* Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) CLI on your system 
+
+### Downloading models
+You will need to download a few models:
+* The image generation network (Upconvolutional network) from [3]. You can download directly on their [website](https://github.com/anguyen8/upconv_release) or using the script provided in.
 
 ## Usage
 The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
@@ -72,3 +78,5 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 [1] Yosinski J, Clune J, Nguyen A, Fuchs T, Lipson H. "Understanding Neural Networks Through Deep Visualization". ICML 2015 Deep Learning workshop.
 
 [2] Zhou B, Khosla A, Lapedriza A, Oliva A, Torralba A. "Object detectors emerge in deep scene cnns". ICLR 2015.
+
+[3] Dosovitskiy A, Brox T. "Generating images with perceptual similarity metrics based on deep networks". arXiv preprint arXiv:1602.02644. 2016
