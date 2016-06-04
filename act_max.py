@@ -66,7 +66,7 @@ def get_code(path, layer):
 
   return zero_feat, data
 
-def make_step_generator(net, x, x0, step_size=1, start, end):
+def make_step_generator(net, x, x0, start, end, step_size=1):
   '''
   Forward and backward passes through the generator DNN.
   '''
@@ -238,7 +238,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
       # 5. backprop the image to generator to get an updated code
-      grad_norm_generator, updated_code = make_step_generator(net=generator, x=updated_x0, x0=x0, step_size=step_size, gen_in_layer, gen_out_layer)
+      grad_norm_generator, updated_code = make_step_generator(net=generator, x=updated_x0, x0=x0, start=gen_in_layer, end=gen_out_layer, step_size=step_size)
 
       # Clipping code
       if clip:
