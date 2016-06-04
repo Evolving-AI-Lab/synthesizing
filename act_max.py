@@ -370,7 +370,7 @@ def main():
     upper_bound = np.loadtxt(args.bound, delimiter=' ', usecols=np.arange(0, n_units), unpack=True)
     upper_bound = upper_bound.reshape(start_code.shape)
 
-    # Lowerbound of 0 due to ReLU
+    # Lower bound of 0 due to ReLU
     lower_bound = np.zeros(start_code.shape)
 
   # generate class visualization via octavewise gradient ascent
@@ -390,7 +390,7 @@ def main():
     )
 
   # Save image
-  collage = patchShow.patchShow(output_image, in_range=(-120,120))
+  collage = patchShow.patchShow_single(output_image, in_range=(-120,120))
   scipy.misc.imsave(filename, collage)
 
   if args.debug:
