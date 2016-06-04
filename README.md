@@ -58,9 +58,9 @@ We provide here four different examples:
 <p align="center">
     <img src="examples/example4.jpg" width=500px>
 </p>
-<p align="center"><i>Visualizations of hidden neurons at layer 5 of DeepScene DNN. From left to right are units that are semantically labeled by humans as:  </i></p>
+<p align="center"><i>Visualizations of hidden neurons at layer 5 of DeepScene DNN. From left to right are units that are semantically labeled by humans as: lighthouse, building, bookcase, food, and painting </i></p>
 
-* This result matches the conclusion that object detectors emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
+* This result matches the conclusion that object detectors automatically emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
@@ -70,4 +70,5 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 ## References
 
 [1] Yosinski J, Clune J, Nguyen A, Fuchs T, Lipson H. "Understanding Neural Networks Through Deep Visualization". ICML 2015 Deep Learning workshop.
+
 [2] Zhou B, Khosla A, Lapedriza A, Oliva A, Torralba A. "Object detectors emerge in deep scene cnns". ICLR 2015.
