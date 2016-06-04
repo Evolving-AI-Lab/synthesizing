@@ -270,7 +270,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
 
       # Print x every 10 iterations
       if debug:
-        print " > iter %s ===== " % i
+        print " > %s " % i
         name = "./debug/%s.jpg" % str(i).zfill(3)
 
         save_image(x.copy(), name)
