@@ -14,6 +14,10 @@ act_layer=fc8
 units="${1}" #"643 10 304 629 945 437"
 xy=0
 
+# Net
+net_weights="nets/placesCNN/places205CNN_iter_300000.caffemodel"
+net_definition="nets/placesCNN/places205CNN_deploy.prototxt"
+
 # Hyperparam settings for visualizing AlexNet
 iters="200"
 weights="99"
@@ -65,7 +69,9 @@ for unit in ${units}; do
               --bound ${bound_file} \
               --debug ${debug} \
               --output_dir ${output_dir} \
-              --init_file ${init_file}
+              --init_file ${init_file} \
+              --net_weights ${net_weights} \
+              --net_definition ${net_definition}
         done
       done
     done
