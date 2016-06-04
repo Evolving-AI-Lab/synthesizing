@@ -244,10 +244,6 @@ def activation_maximization(encoder, decoder, start_layer, code, octaves, clip=F
             # Crop and convert image from RGB back to BGR
             updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
-            # Apply L2 to the optimized image
-            if o['L2_img'] > 0 and o['L2_img'] < 1:
-                updated_x0 *= o['L2_img']
-
             # 5. backprop the image to encoder to get an updated pool5 code
             grad_norm_decoder, updated_code = make_step_decoder(decoder, updated_x0, x0, step_size, start=start_layer, end=output_layer)
 
@@ -320,13 +316,10 @@ def main():
     parser.add_argument('--unit', metavar='unit', type=int, help='fc8 unit within [0, 999]')
     parser.add_argument('--n_iters', metavar='iter', type=int, default=10, help='Number of iterations')
     parser.add_argument('--L2', metavar='w', type=float, default=1.0, nargs='?', help='L2 weight')
-    parser.add_argument('--L2_img', metavar='w', type=float, default=1.0, nargs='?', help='L2 weight for the image')
     parser.add_argument('--lr', metavar='lr', type=float, default=2.0, nargs='?', help='Learning rate')
     parser.add_argument('--end_lr', metavar='lr', type=float, default=-1.0, nargs='?', help='Ending Learning rate')
     parser.add_argument('--seed', metavar='n', type=int, default=0, nargs='?', help='Learning rate')
     parser.add_argument('--xy', metavar='n', type=int, default=0, nargs='?', help='Spatial position for conv units')
-    parser.add_argument('--start_tv', metavar='w', type=float, default=0.0, nargs='?', help='Total variation')
-    parser.add_argument('--end_tv', metavar='w', type=float, default=0.0, nargs='?', help='Total variation')
     parser.add_argument('--opt_layer', metavar='s', type=str, help='Layer at which we optimize a code')
     parser.add_argument('--act_layer', metavar='s', type=str, default="fc8", help='Layer at which we activate a neuron')
     parser.add_argument('--init_file', metavar='s', type=str, default="", help='Init image')
@@ -364,10 +357,7 @@ def main():
             'layer': args.act_layer,
             'iter_n': args.n_iters,
             'L2_weight': args.L2,
-            'L2_img': args.L2_img,
             'start_step_size': args.lr,
-            'start_denoise_weight': args.start_tv,
-            'end_denoise_weight': args.end_tv,
             'end_step_size': args.end_lr
         }
     ]
@@ -420,7 +410,7 @@ def main():
           args.seed
       )
 
-    # Save image following Alexey's demo
+    # Save image
     collage = patchShow.patchShow(output_image, in_range=(-120,120))
     scipy.misc.imsave(filename, collage)
 
