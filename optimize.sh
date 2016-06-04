@@ -63,14 +63,14 @@ for unit in ${units}; do
               --unit ${unit} \
               --xy ${xy} \
               --n_iters ${n_iters} \
-              --start_lr ${lr} 
+              --start_lr ${lr} \
               --end_lr ${end_lr} \
               --L2 ${L2} \
               --seed ${seed} \
               --clip ${clip} \
               --bound ${bound_file} \
               --debug ${debug} \
-              --output_dir ${output_dir}
+              --output_dir ${output_dir} \
               --init_file ${init_file}
         done
       done
