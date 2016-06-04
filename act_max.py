@@ -249,6 +249,10 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
         updated_code = np.maximum(updated_code, lower_bound) 
         updated_code = np.minimum(updated_code, upper_bound) 
 
+      # L2 on code to make the feature vector smaller every iteration
+      if o['L2_weight'] > 0 and o['L2_weight'] < 1:
+        updated_code[:] *= o['L2_weight']
+
       # Update code
       src.data[:] = updated_code
 
@@ -261,10 +265,6 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
 
         # Save acts for later
         list_acts.append( (name, act) )
-  
-      # L2 on code to make the feature vector smaller every iteration
-      if o['L2_weight'] > 0 and o['L2_weight'] < 1:
-        src.data[:] *= o['L2_weight']
 
       # Stop if grad is 0
       if grad_norm_generator == 0:
