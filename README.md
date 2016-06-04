@@ -1,4 +1,4 @@
-## Activation maximization via Upconvolutional networks
+## Activation Maximization via Upconvolutional Networks
 
 This repository contains source code necessary to reproduce some of the main results in the paper:
 
