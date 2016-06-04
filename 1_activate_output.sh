@@ -5,8 +5,7 @@ if [ "$#" -ne "1" ]; then
   exit 1
 fi
 
-# Go to each class directory
-# Find the cluster with the largest number of files
+# Get label for each unit
 path_labels="synset_words.txt"
 IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
