@@ -53,13 +53,13 @@ We provide here four different examples:
     <img src="examples/example3.jpg" width=600px>
 </p>
 
-[4_activate_hidden.sh](4_activate_hidden.sh): Optimizing a code to activate a *hidden* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+[4_activate_hidden.sh](4_activate_hidden.sh): Optimizing a code to activate a *hidden* neuron of the [DeepScene DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on MIT Places dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
     <img src="examples/example4.jpg" width=500px>
 </p>
 
-* These 5 random neurons are a bit boring, but you can visualize more interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as in Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or face/text detectors in CaffeNet as found in [1].
+* This result matches the finding that object detectors emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more.
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
@@ -68,4 +68,5 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 
 ## References
 
- [1] J. Yosinski, J. Clune, A. Nguyen, T. Fuchs, H. Lipson H (2015) "Understanding Neural Networks Through Deep Visualization", ICML 2015 Deep Learning workshop.
+[1] Yosinski J, Clune J, Nguyen A, Fuchs T, Lipson H. "Understanding Neural Networks Through Deep Visualization". ICML 2015 Deep Learning workshop.
+[2] Zhou B, Khosla A, Lapedriza A, Oliva A, Torralba A. "Object detectors emerge in deep scene cnns". ICLR 2015.
