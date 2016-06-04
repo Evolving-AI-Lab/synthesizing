@@ -39,6 +39,10 @@ We provide here four different examples:
 
 * [2_activate_hidden.sh](2_activate_hidden.sh): Optimizing a code to activate a *hidden* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
+<p align="center">
+    <img src="examples/example2.jpg" width=600px>
+</p>
+
 * [3_start_from_real_image.sh](3_start_from_real_image.sh):
 * [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
 
