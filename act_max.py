@@ -175,15 +175,17 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
   # Get the input and output sizes
   output_layer = 'deconv0'
   data_shape = net.blobs['data'].data.shape
-  output_shape = generator.blobs[output_layer].data.shape
+  generator_output_shape = generator.blobs[output_layer].data.shape
 
+  # Calculate the difference between the input image to the net being visualized
+  # and the output image from the generator
   image_size = get_shape(data_shape)
-  output_size = get_shape(output_shape)
+  output_size = get_shape(generator_output_shape)
 
   # The top left offset that we start cropping the output image to get the 227x227 image
   topleft = ((output_size[0] - image_size[0])/2, (output_size[1] - image_size[1])/2)
 
-  print "starting optimizing"
+  print "Starting optimizing"
 
   x = None
   src = generator.blobs[start_layer]
@@ -191,7 +193,7 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
   # Make sure the layer size and initial vector size match
   assert_array_equal(src.data.shape, code.shape)
 
-  # src.data is the image x that we optimize
+  # Take the starting code as the input to the generator
   src.data[:] = code.copy()[:]
 
   # Initialize an empty result
@@ -247,7 +249,11 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
         updated_code = np.maximum(updated_code, lower_bound) 
         updated_code = np.minimum(updated_code, upper_bound) 
 
-      # Update code
+      # L2 on code to make the feature vector smaller every iteration
+      if o['L2_weight'] > 0 and o['L2_weight'] < 1:
+        updated_code *= o['L2_weight']
+
+      # Save code
       src.data[:] = updated_code
 
       # Print x every 10 iterations
@@ -259,10 +265,6 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
 
         # Save acts for later
         list_acts.append( (name, act) )
-  
-      # L2 on code to make the feature vector smaller every iteration
-      if o['L2_weight'] > 0 and o['L2_weight'] < 1:
-        src.data[:] *= o['L2_weight']
 
       # Stop if grad is 0
       if grad_norm_generator == 0:
