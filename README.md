@@ -42,3 +42,7 @@ We provide here four different examples:
 * [3_start_from_real_image.sh](3_start_from_real_image.sh):
 * [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
 
+## Licenses
+Note that while the code in this repository is licensed under MIT License, the pre-trained models used by the code have their own licenses.
+Specifically, the image generator networks are for non-commercial use only. See their [page](http://lmb.informatik.uni-freiburg.de/resources/software.php) for more.
+Specifically, (including the image generator network
