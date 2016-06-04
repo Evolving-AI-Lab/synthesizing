@@ -170,7 +170,7 @@ def save_image(img, name):
   scipy.misc.imsave(name, normalized_img)
 
 
-def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_code, phases, 
+def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_code, params, 
       clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None):
 
   # Get the input and output sizes
@@ -203,7 +203,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
   # Save the activation of each image generated
   list_acts = []
 
-  for o in phases:
+  for o in params:
     
     # select layer
     layer = o['layer']
@@ -251,8 +251,8 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
         updated_code = np.minimum(updated_code, upper_bound) 
 
       # L2 on code to make the feature vector smaller every iteration
-      if o['L2_weight'] > 0 and o['L2_weight'] < 1:
-        updated_code[:] *= o['L2_weight']
+      if o['L2'] > 0 and o['L2'] < 1:
+        updated_code[:] *= o['L2']
 
       # Update code
       src.data[:] = updated_code
@@ -325,7 +325,7 @@ def main():
   print "-------------"
   print " unit: %s  xy: %s" % (args.unit, args.xy)
   print " n_iters: %s" % args.n_iters
-  print " L2 weight: %s" % args.L2
+  print " L2: %s" % args.L2
   print " start learning rate: %s" % args.start_lr
   print " end learning rate: %s" % args.end_lr
   print " seed: %s" % args.seed
@@ -338,11 +338,11 @@ def main():
   print " output dir: %s" % args.output_dir
   print "-------------"
 
-  phases = [
+  params = [
     {
       'layer': args.act_layer,
       'iter_n': args.n_iters,
-      'L2_weight': args.L2,
+      'L2': args.L2,
       'start_step_size': args.start_lr,
       'end_step_size': args.end_lr
     }
@@ -384,7 +384,7 @@ def main():
     lower_bound = np.zeros(start_code.shape)
 
   # Optimize a code via gradient ascent
-  output_image = activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_code, phases, 
+  output_image = activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_code, params, 
             clip=args.clip, unit=args.unit, xy=args.xy, debug=args.debug,
             upper_bound=upper_bound, lower_bound=lower_bound)
 
