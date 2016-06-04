@@ -31,23 +31,36 @@ The main Python file is [act_max.py](act_max.py), which is a standalone Python s
 
 We provide here four different examples:
 
-* [1_activate_output.sh](1_activate_output.sh): Optimizing a code to activate an *output* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+[1_activate_output.sh](1_activate_output.sh): Optimizing a code to activate an *output* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
     <img src="examples/example1.jpg" width=600px>
 </p>
 
-* [2_activate_hidden.sh](2_activate_hidden.sh): Optimizing a code to activate a *hidden* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+[2_activate_hidden.sh](2_activate_hidden.sh): Optimizing a code to activate a *hidden* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
-    <img src="examples/example2.jpg" width=600px>
+    <img src="examples/example2.jpg" width=500px>
 </p>
 
-* [3_start_from_real_image.sh](3_start_from_real_image.sh):
-* [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
+* These 5 random neurons are a bit boring, but you can visualize more interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as in Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or face/text detectors in CaffeNet as found in [1].
+
+[3_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
+* Depending on the hyperparameter settings, one could produce images near or far the initialization code.
+* Here, the `debug` option is enabled, so one can see the activations of intermediate images. The script produces:
+
+<p align="center">
+    <img src="examples/example3.jpg" width=600px>
+</p>
+
+
+[4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
 * The [image generator networks](https://arxiv.org/abs/1602.02644) are for non-commercial use only. See their [page](http://lmb.informatik.uni-freiburg.de/resources/software.php) for more.
 * See the licenses of the models that you visualize (e.g. [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf)) before use.
 
+## References
+
+ [1] J. Yosinski, J. Clune, A. Nguyen, T. Fuchs, H. Lipson H (2015) "Understanding Neural Networks Through Deep Visualization", ICML 2015 Deep Learning workshop.
