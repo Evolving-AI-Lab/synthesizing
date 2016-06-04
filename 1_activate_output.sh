@@ -1,9 +1,10 @@
 #/bin/bash
 
-if [ "$#" -ne "1" ]; then
-  echo "Provide 1 output unit number e.g. 945 for bell pepper."
-  exit 1
-fi
+# Take in an unit number
+#if [ "$#" -ne "1" ]; then
+#  echo "Provide 1 output unit number e.g. 945 for bell pepper."
+#  exit 1
+#fi
 
 # Get label for each unit
 path_labels="synset_words.txt"
@@ -11,7 +12,7 @@ IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
 act_layer=fc8
-units="${1}" #"643 10 304 629 945 437"
+units="643 624 304 629 437"
 xy=0
 
 # Hyperparam settings for visualizing AlexNet
@@ -38,8 +39,17 @@ output_dir="output"
 rm -rf ${output_dir}
 mkdir ${output_dir}
 
+list_files=""
+
 # Running optimization across a sweep of hyperparams
 for unit in ${units}; do
+
+  unit_pad=`printf "%04d" ${unit}`
+
+  # Get label for each unit
+  label_1=`echo ${labels[unit]} | cut -d "," -f 1 | cut -d " " -f 2`
+  label_2=`echo ${labels[unit]} | cut -d "," -f 1 | cut -d " " -f 3`
+  label="${label_1} ${label_2}"
 
   for seed in {0..0}; do
   #for seed in {0..8}; do
@@ -66,9 +76,23 @@ for unit in ${units}; do
               --debug ${debug} \
               --output_dir ${output_dir} \
               --init_file ${init_file}
+
+          # output/fc8_0643_200_0.99_8.0__0.jpg
+          f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
+          convert $f -gravity south -splice 0x10 $f
+          convert $f -append -gravity Center -pointsize 30 label:"$label" -bordercolor white -border 0x0 -append $f
+
+          list_files="${list_files} ${f}"
         done
       done
     done
   
   done
 done
+
+# Make a collage
+output_file=${output_dir}/example1.jpg
+montage ${list_files} -tile 5x1 -geometry +1+1 ${output_file}
+convert ${output_file} -trim ${output_file}
+echo "=============================="
+echo "Result of example 1 saved to [ ${output_file} ]"
