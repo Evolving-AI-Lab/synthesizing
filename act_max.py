@@ -78,7 +78,7 @@ def get_code(path, layer):
 
   return zero_feat, data
 
-def make_step_generator(net, x, x0, step_size=1.5, start='pool5', end='fc8'):
+def make_step_generator(net, x, x0, step_size=1.5, start='fc6', end='fc8'):
   '''Basic gradient ascent step.'''
 
   src = net.blobs[start] # input image is stored in Net's 'data' blob
@@ -89,23 +89,19 @@ def make_step_generator(net, x, x0, step_size=1.5, start='pool5', end='fc8'):
   net.backward(start=end)
   g = net.blobs[start].diff.copy()
 
-  # print "g:", g.shape
   grad_norm = norm(g)
-  # print " norm generator: %s" % grad_norm
-  # print "max: %s [%.2f]\t obj: %s [%.2f]\t norm: [%.2f]" % (best_unit, fc[best_unit], unit, obj_act, grad_norm)
+
+  # reset objective after each step
+  dst.diff.fill(0.)
 
   # If norm is Nan, skip updating the image
   if math.isnan(grad_norm):
-    dst.diff.fill(0.)
     return 1e-12, src.data[:].copy()  
   elif grad_norm == 0:
-    dst.diff.fill(0.)
     return 0, src.data[:].copy()
 
+  # Make an update
   src.data[:] += step_size/np.abs(g).mean() * g
-
-  # reset objective for next step
-  dst.diff.fill(0.)
 
   return grad_norm, src.data[:].copy()
 
@@ -113,7 +109,7 @@ def make_step_generator(net, x, x0, step_size=1.5, start='pool5', end='fc8'):
 def make_step_net(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
   '''Basic gradient ascent step.'''
 
-  src = net.blobs['data'] # input image is stored in Net's 'data' blob
+  src = net.blobs['data'] # input image
   dst = net.blobs[end]
 
   acts = net.forward(data=image, end=end)
@@ -134,19 +130,19 @@ def make_step_net(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
   diffs = net.backward(start=end, diffs=['data'])
   g = diffs['data'][0]
 
-  # print "g:", g.shape
   grad_norm = norm(g)
   obj_act = 0
 
+  # reset objective after each step
+  dst.diff.fill(0.)
+
   # If grad norm is Nan, skip updating
   if math.isnan(grad_norm):
-    dst.diff.fill(0.)
     return 1e-12, src.data[:].copy(), obj_act
   elif grad_norm == 0:
-    dst.diff.fill(0.)
     return 0, src.data[:].copy(), obj_act
 
-  # Check if the activation of the given unit is increasing
+  # Check the activations
   if end in fc_layers:
     fc = acts[end][0]
     best_unit = fc.argmax()
@@ -159,22 +155,19 @@ def make_step_net(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
 
   print "max: %s [%.2f]\t obj: %s [%.2f]\t norm: [%.2f]" % (best_unit, fc[best_unit], unit, obj_act, grad_norm)
 
+  # Make an update
   src.data[:] += step_size/np.abs(g).mean() * g
-
-  # reset objective for next step
-  dst.diff.fill(0.)
 
   return (grad_norm, src.data[:].copy(), obj_act)
 
 
 def get_shape(data_shape):
+
+  # Return (227, 227) from (1, 3, 227, 227) tensor
   if len(data_shape) == 4:
-    # Return (227, 227) from (1, 3, 227, 227) tensor
-    size = (data_shape[2], data_shape[3])
+    return (data_shape[2], data_shape[3])
   else:
     raise Exception("Data shape invalid.")
-
-  return size
 
 
 def activation_maximization(net, generator, start_layer, code, phases, clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
