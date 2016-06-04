@@ -21,3 +21,7 @@ This code is built on top of Caffe. You'll need to install the following:
 * Build the Python bindings for Caffe
 * If you have an NVIDIA GPU, you can optionally build Caffe with the GPU option to make it run faster
 * Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) CLI on your system
+
+## Usage
+The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments.
+
