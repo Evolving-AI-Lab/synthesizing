@@ -29,7 +29,7 @@ if settings.gpu:
 
 def get_code(path, layer):
   '''
-  Get a code from an image.
+  Push the given image through an encoder to get a code.
   '''
 
   # set up the inputs for the net: 
