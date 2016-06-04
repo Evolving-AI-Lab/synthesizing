@@ -367,7 +367,6 @@ def main():
                            mean = mean, # ImageNet mean, training set dependent
                            channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
-    unit = args.unit
     shape = decoder.blobs['feat'].data.shape
 
     # Fix the seed
@@ -393,14 +392,14 @@ def main():
 
     # generate class visualization via octavewise gradient ascent
     output_image = activation_maximization(encoder, decoder, 'feat', start_code, octaves, 
-                        clip=args.clip, unit=unit, xy=args.xy, debug=args.debug,
+                        clip=args.clip, unit=args.unit, xy=args.xy, debug=args.debug,
                         upper_bound=upper_bound, lower_bound=lower_bound)
 
     # save image
     filename = "%s/%s_%s_%s_%s_%s__%s.jpg" % (
           args.output_dir,
           args.act_layer, 
-          str(unit).zfill(4), 
+          str(args.unit).zfill(4), 
           str(args.n_iters).zfill(2), 
           args.L2, 
           args.lr,
