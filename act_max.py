@@ -246,10 +246,11 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
             # 5. backprop the image to generator to get an updated code
             grad_norm_generator, updated_code = make_step_generator(generator, updated_x0, x0, step_size, start=start_layer, end=output_layer)
 
+            # Clipping code
             if clip:
-              # VAE prior is N(0,1)
-              updated_code = np.clip(updated_code, a_min=-1, a_max=1)
+              updated_code = np.clip(updated_code, a_min=-1, a_max=1)   # VAE prior is within N(0,1)
 
+            # Clipping each neuron independently
             elif upper_bound is not None:
               updated_code = np.maximum(updated_code, lower_bound) 
               updated_code = np.minimum(updated_code, upper_bound) 
@@ -264,12 +265,10 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
                 name = "./frames/%s.jpg" % str(i).zfill(3)
                 scipy.misc.imsave(name, print_x)
 
+                # Save acts for later
                 list_acts.append( (name, act) )
     
-                print "code --- min: %s -- max: %s" % (np.min(updated_code), np.max(updated_code))
-            
-            # L2 on code
-            # Trying to make the feature vector smaller every iteration
+            # L2 on code to make the feature vector smaller every iteration
             if o['L2_weight'] > 0 and o['L2_weight'] < 1:
                 src.data[:] *= o['L2_weight']
 
@@ -291,9 +290,6 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
         name = p[0]
         act = p[1]
 
-        #subprocess.call(["echo \"%s %s\" >> list.txt" % (name, act)], shell=True)
-        #print "%s -> %s" % (name, act)
-        #subprocess.call(["ls", name])
         write_label(name, act)
 
     return best_xx
