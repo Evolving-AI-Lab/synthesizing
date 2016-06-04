@@ -26,8 +26,8 @@ fi
 
 # Output dir
 output_dir="output"
-rm -rf ${output_dir}
-mkdir ${output_dir}
+#rm -rf ${output_dir}
+mkdir -p ${output_dir}
 
 # Running optimization across a sweep of hyperparams
 for unit in ${units}; do
@@ -65,7 +65,7 @@ for unit in ${units}; do
 done
 
 if [ "${debug}" -eq "1" ]; then
-  output_file=debug/series.jpg
+  output_file=${output_dir}/example3.jpg
   montage debug/*.jpg -tile 10x20 -geometry +1+1 ${output_file}
   convert ${output_file} -trim ${output_file}
 
