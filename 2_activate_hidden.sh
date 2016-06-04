@@ -1,7 +1,7 @@
 #/bin/bash
 
 if [ "$#" -ne "1" ]; then
-  echo "Provide 1 output unit number e.g. 945 for bell pepper."
+  echo "Provide 1 output channel number at a conv5, e.g. 151"
   exit 1
 fi
 
