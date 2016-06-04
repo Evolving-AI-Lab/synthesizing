@@ -33,12 +33,6 @@ conv_layers = ["conv1", "conv2", "conv3", "conv4", "conv5"]
 if settings.gpu:
   caffe.set_mode_gpu() # uncomment this if gpu processing is available
 
-# networks
-decoder = caffe.Net(settings.decoder_definition, settings.decoder_path, caffe.TEST)
-encoder = caffe.Classifier(settings.encoder_definition, settings.encoder_path,
-                       mean = mean, # ImageNet mean, training set dependent
-                       channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
-
 # a couple of utility functions for converting to and from Caffe's input image layout
 def preprocess(net, img):
     return np.float32(np.rollaxis(img, 2)[::-1]) - net.transformer.mean['data']
@@ -73,7 +67,6 @@ def get_code(path, layer):
     data -= np.expand_dims(np.transpose(image_mean, (2,0,1)), 0) # mean is already BGR
 
     #initialize the caffenet to extract the features
-    # caffe.set_mode_cpu() # replace by caffe.set_mode_gpu() to run on a GPU
     caffenet = caffe.Net(settings.encoder_definition, settings.encoder_path, caffe.TEST)
 
     # run caffenet and extract the features
@@ -81,12 +74,7 @@ def get_code(path, layer):
     feat = np.copy(caffenet.blobs[layer].data)
     del caffenet
 
-    print "feat shape", feat.shape
-
     zero_feat = feat[0].copy()[np.newaxis]
-
-    print "feat shape", zero_feat.shape
-
 
     return zero_feat, data
 
@@ -383,6 +371,12 @@ def main():
             'end_step_size': args.end_lr
         }
     ]
+
+    # networks
+    decoder = caffe.Net(settings.decoder_definition, settings.decoder_path, caffe.TEST)
+    encoder = caffe.Classifier(settings.encoder_definition, settings.encoder_path,
+                           mean = mean, # ImageNet mean, training set dependent
+                           channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
     unit = args.unit
     shape = decoder.blobs['feat'].data.shape
