@@ -229,7 +229,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       # Save the solution
       # Note that we're not saving the solutions with the highest activations
       # Because there is no correlation between activation and recognizability
-      best_xx = cropped_x0.copy()
+      best_xx = cropped_x0.copy()[:,::-1, :, :]
       best_act = act
 
       # 4. Place the changes in x (227x227) back to x0 (256x256)
