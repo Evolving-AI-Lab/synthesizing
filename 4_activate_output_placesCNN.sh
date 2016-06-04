@@ -11,7 +11,7 @@ IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
 act_layer=fc8
-units="2 7 8 12 15" #"${1}"
+units="2 7 8 12 70" #"${1}"
 xy=0
 
 # Net
