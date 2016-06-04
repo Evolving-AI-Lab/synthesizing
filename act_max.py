@@ -78,8 +78,10 @@ def get_code(path, layer):
 
   return zero_feat, data
 
-def make_step_generator(net, x, x0, step_size=1.5, start='fc6', end='fc8'):
-  '''Basic gradient ascent step.'''
+def make_step_generator(net, x, x0, step_size=1, start='fc6', end='fc8'):
+  '''
+  Forward and backward passes through the generator DNN.
+  '''
 
   src = net.blobs[start] # input image is stored in Net's 'data' blob
   dst = net.blobs[end]
@@ -106,8 +108,10 @@ def make_step_generator(net, x, x0, step_size=1.5, start='fc6', end='fc8'):
   return grad_norm, src.data[:].copy()
 
 
-def make_step_net(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
-  '''Basic gradient ascent step.'''
+def make_step_net(net, image, xy=0, step_size=1, end='fc8', unit=None):
+  '''
+  Forward and backward passes through the DNN being visualized.
+  '''
 
   src = net.blobs['data'] # input image
   dst = net.blobs[end]
@@ -169,9 +173,14 @@ def get_shape(data_shape):
   else:
     raise Exception("Data shape invalid.")
 
+
 def save_image(img, name):
+  '''
+  Normalize and save the image.
+  '''
   normalized_img = patchShow.patchShow_single(img, in_range=(-120,120))        
   scipy.misc.imsave(name, normalized_img)
+
 
 def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, phases, 
       clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None):
@@ -291,11 +300,13 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, p
 
   return best_xx
 
+
 def write_label(filename, act):
   # Add activation below each image via ImageMagick
   subprocess.call(["convert %s -gravity south -splice 0x10 %s" % (filename, filename)], shell=True)
   subprocess.call(["convert %s -append -gravity Center -pointsize %s label:\"%.2f\" -bordercolor white -border 0x0 -append %s" %
          (filename, 30, act, filename)], shell=True)
+
 
 def main():
 
@@ -401,11 +412,11 @@ def main():
 
   # Save image
   save_image(output_image, filename)
+  print "Saved to %s" % filename
 
   if args.debug:
     save_image(output_image, "./debug/%s.jpg" % str(args.n_iters).zfill(3))
-
-  print "Saved to %s" % filename
+  
 
 if __name__ == '__main__':
   main()
