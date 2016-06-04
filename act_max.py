@@ -5,12 +5,11 @@ os.environ['GLOG_minloglevel'] = '2'  # suprress Caffe verbose prints
 import settings
 import site
 site.addsitedir(settings.caffe_root)
+import caffe
 
-# imports and basic notebook setup
 import numpy as np
 import math
-import os,re,random
-import PIL.Image
+import random
 import sys, subprocess
 from IPython.display import clear_output, Image, display
 from scipy.misc import imresize
@@ -18,12 +17,7 @@ from numpy.linalg import norm
 from numpy.testing import assert_array_equal
 import scipy.misc, scipy.io
 import patchShow
-
 import argparse # parsing arguments
-
-# pycaffe_root = settings.caffe_root # substitute your path here
-# sys.path.insert(0, pycaffe_root)
-import caffe
 
 mean = np.float32([104.0, 117.0, 123.0])
 
