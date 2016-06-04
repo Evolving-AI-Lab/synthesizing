@@ -68,7 +68,9 @@ for unit in ${units}; do
               --bound ${bound_file} \
               --debug ${debug} \
               --output_dir ${output_dir} \
-              --init_file ${init_file}
+              --init_file ${init_file} \
+              --net_weights ${net_weights} \
+              --net_definition ${net_definition}
           
           unit_pad=`printf "%04d" ${unit}`
           f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
