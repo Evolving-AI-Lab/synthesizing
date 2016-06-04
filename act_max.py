@@ -222,18 +222,14 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       # 2. forward pass the image x0 to net to maximize an unit k
       # 3. backprop the gradient from net to the image to get an updated image x
       grad_norm_net, x, act = make_step_net(net=net, end=layer, unit=unit, image=cropped_x0, xy=xy, step_size=step_size)
-
-      # Convert from BGR to RGB
-      # x = x[:,::-1, :, :]
-
+      
       # Save the solution
       # Note that we're not saving the solutions with the highest activations
       # Because there is no correlation between activation and recognizability
-      best_xx = cropped_x0.copy()[:,::-1, :, :]
+      best_xx = cropped_x0.copy()[:,::-1, :, :] # Convert from BGR to RGB
       best_act = act
 
       # 4. Place the changes in x (227x227) back to x0 (256x256)
-      # Convert image from RGB back to BGR
       updated_x0 = x0.copy()        
       updated_x0[:,:,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
