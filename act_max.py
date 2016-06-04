@@ -238,7 +238,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
       # 5. backprop the image to generator to get an updated code
-      grad_norm_generator, updated_code = make_step_generator(generator, updated_x0, x0, step_size, start=gen_in_layer, end=gen_out_layer)
+      grad_norm_generator, updated_code = make_step_generator(generator, updated_x0, x0, step_size, gen_in_layer, gen_out_layer)
 
       # Clipping code
       if clip:
