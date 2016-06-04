@@ -35,6 +35,8 @@ output_dir="output"
 rm -rf ${output_dir}
 mkdir ${output_dir}
 
+list_files=""
+
 # Sweeping across hyperparams
 for unit in ${units}; do
 
@@ -75,7 +77,7 @@ for unit in ${units}; do
 done
 
 # Make a collage
-output_file=${output_dir}/example1.jpg
+output_file=${output_dir}/example2.jpg
 montage ${list_files} -tile 5x1 -geometry +1+1 ${output_file}
 convert ${output_file} -trim ${output_file}
 echo "=============================="
