@@ -33,11 +33,6 @@ conv_layers = ["conv1", "conv2", "conv3", "conv4", "conv5"]
 if settings.gpu:
   caffe.set_mode_gpu() # uncomment this if gpu processing is available
 
-# a couple of utility functions for converting to and from Caffe's input image layout
-def preprocess(net, img):
-  return np.float32(np.rollaxis(img, 2)[::-1]) - net.transformer.mean['data']
-def deprocess(net, img):
-  return np.dstack((img + net.transformer.mean['data'])[::-1])
 
 def get_code(path, layer):
   '''
