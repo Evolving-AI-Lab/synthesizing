@@ -6,12 +6,12 @@ if [ "$#" -ne "1" ]; then
 fi
 
 # Get label for each unit
-path_labels="synset_words.txt"
+path_labels="misc/categoryIndex_places205.txt"
 IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
 act_layer=fc8
-units="${1}" #"643 10 304 629 945 437"
+units="2 7 8 12 15" #"${1}"
 xy=0
 
 # Net
