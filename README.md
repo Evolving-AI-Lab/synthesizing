@@ -31,7 +31,7 @@ The main Python file is [act_max.py](act_max.py), which is a standalone Python s
 
 We provide here four different examples:
 
-* [1_activate_output.sh](1_activate_output.sh): Optimizing a code to activate an output neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+* [1_activate_output.sh](1_activate_output.sh): Optimizing a code to activate an *output* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
     <img src="examples/example1.jpg" width=600px>
