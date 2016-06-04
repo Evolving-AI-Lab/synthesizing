@@ -25,7 +25,7 @@ end_lr=1e-10
 clip=0
 multiplier=3
 bound_file=act_range/${multiplier}x/${opt_layer}.txt
-init_file="images/cat.jpg"
+init_file="None" #"images/cat.jpg"
 
 # Debug
 debug=0
@@ -66,7 +66,7 @@ for unit in ${units}; do
               --bound ${bound_file} \
               --debug ${debug} \
               --output_dir ${output_dir} \
-              # --init_file ${init_file}
+              --init_file ${init_file}
         done
       done
     done
