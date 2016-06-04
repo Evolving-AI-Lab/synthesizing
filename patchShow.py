@@ -41,7 +41,7 @@ def patchShow_single(images, out_range=(0.,1.), in_range=None):
     
   result = np.zeros((ih, iw, 3))
 
-  # Outputting correct results  
+  # Normalize before saving
   result[:] = images[0].copy().transpose((1,2,0))
   result = normalize(result, out_range, in_range)
   return result
