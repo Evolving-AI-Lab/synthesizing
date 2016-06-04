@@ -8,7 +8,7 @@
 
 opt_layer=fc6
 act_layer=conv5
-units="35 68 100" #"${1}"
+units="15 20 27" #"${1}"
 xy=6  # spatial location (6, 6)
 
 # Hyperparam settings for visualizing AlexNet
