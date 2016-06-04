@@ -7,9 +7,7 @@ fi
 
 # Go to each class directory
 # Find the cluster with the largest number of files
-dir="/home/anh/data"
-
-path_labels="/home/anh/src/caffe/data/ilsvrc12/synset_words.txt"
+path_labels="synset_words.txt"
 IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
@@ -44,8 +42,6 @@ mkdir ${output_dir}
 
 # Running optimization across a sweep of hyperparams
 for unit in ${units}; do
-  unit_pad=`printf "%04d" ${unit}`
-  # category=`echo ${labels[unit]} | cut -d " " -f 1`
 
   for seed in {0..0}; do
   #for seed in {0..8}; do
