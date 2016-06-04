@@ -21,8 +21,8 @@ import patchShow
 
 import argparse # parsing arguments
 
-pycaffe_root = settings.caffe_root # substitute your path here
-sys.path.insert(0, pycaffe_root)
+# pycaffe_root = settings.caffe_root # substitute your path here
+# sys.path.insert(0, pycaffe_root)
 import caffe
 
 mean = np.float32([104.0, 117.0, 123.0])
