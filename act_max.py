@@ -169,6 +169,9 @@ def get_shape(data_shape):
   else:
     raise Exception("Data shape invalid.")
 
+def save_image(img, name):
+  normalized_img = patchShow.patchShow_single(img, in_range=(-120,120))        
+  scipy.misc.imsave(name, normalized_img)
 
 def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, phases, 
       clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
@@ -259,9 +262,9 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, p
       # Print x every 10 iterations
       if debug:
         print " > iter %s ===== " % i
-        print_x = patchShow.patchShow(x.copy(), in_range=(-120,120))
         name = "./frames/%s.jpg" % str(i).zfill(3)
-        scipy.misc.imsave(name, print_x)
+
+        save_image(x.copy(), name)
 
         # Save acts for later
         list_acts.append( (name, act) )
@@ -397,11 +400,10 @@ def main():
     )
 
   # Save image
-  output_img = patchShow.patchShow_single(output_image, in_range=(-120,120))
-  scipy.misc.imsave(filename, output_img)
+  save_image(output_image, filename)
 
   if args.debug:
-    scipy.misc.imsave("./frames/%s.jpg" % str(args.n_iters).zfill(3), output_img)
+    save_image(output_img, "./frames/%s.jpg" % str(args.n_iters).zfill(3))
 
   print "Saved to %s" % filename
 
