@@ -307,7 +307,7 @@ def main():
   parser.add_argument('--xy', metavar='n', type=int, default=0, nargs='?', help='Spatial position for conv units')
   parser.add_argument('--opt_layer', metavar='s', type=str, help='Layer at which we optimize a code')
   parser.add_argument('--act_layer', metavar='s', type=str, default="fc8", help='Layer at which we activate a neuron')
-  parser.add_argument('--init_file', metavar='s', type=str, default="", help='Init image')
+  parser.add_argument('--init_file', metavar='s', type=str, default="None", help='Init image')
   parser.add_argument('--debug', metavar='b', type=int, default=0, help='Print out the images or not')
   parser.add_argument('--clip', metavar='b', type=int, default=0, help='Clip out within a code range')
   parser.add_argument('--bound', metavar='b', type=str, default="", help='The file to an array that is the upper bound for activation range')
@@ -362,7 +362,7 @@ def main():
   # Fix the seed
   np.random.seed(args.seed)
 
-  if args.init_file != "":
+  if args.init_file != "None":
     start_code, start_image = get_code(args.init_file, args.opt_layer)
 
     print "Loaded start code: ", start_code.shape
