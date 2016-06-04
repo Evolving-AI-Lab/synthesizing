@@ -12,7 +12,7 @@ IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
 act_layer=fc8
-units="643 624 304 629 437"
+units="643 624 304 629 437" #"${1}"
 xy=0
 
 # Hyperparam settings for visualizing AlexNet
@@ -25,7 +25,7 @@ end_lr=1e-10
 clip=0
 multiplier=3
 bound_file=act_range/${multiplier}x/${opt_layer}.txt
-init_file="None" #"images/cat.jpg"
+init_file="None"
 
 # Debug
 debug=0
@@ -41,7 +41,7 @@ mkdir ${output_dir}
 
 list_files=""
 
-# Running optimization across a sweep of hyperparams
+# Sweeping across hyperparams
 for unit in ${units}; do
 
   unit_pad=`printf "%04d" ${unit}`
@@ -77,7 +77,7 @@ for unit in ${units}; do
               --output_dir ${output_dir} \
               --init_file ${init_file}
 
-          # output/fc8_0643_200_0.99_8.0__0.jpg
+          # Add a category label to each image
           f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
           convert $f -gravity south -splice 0x10 $f
           convert $f -append -gravity Center -pointsize 30 label:"$label" -bordercolor white -border 0x0 -append $f
@@ -95,4 +95,4 @@ output_file=${output_dir}/example1.jpg
 montage ${list_files} -tile 5x1 -geometry +1+1 ${output_file}
 convert ${output_file} -trim ${output_file}
 echo "=============================="
-echo "Result of example 1 saved to [ ${output_file} ]"
+echo "Result of example 1: [ ${output_file} ]"
