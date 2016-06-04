@@ -36,8 +36,8 @@ fi
 
 # Output dir
 output_dir="output"
-rm -rf ${output_dir}
-mkdir ${output_dir}
+#rm -rf ${output_dir}
+mkdir -p ${output_dir}
 
 list_files=""
 
