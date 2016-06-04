@@ -351,7 +351,7 @@ def main():
                mean = mean, # ImageNet mean
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
-  print generator.blobs
+  print generator.blobs[0]
 
   return None
 
