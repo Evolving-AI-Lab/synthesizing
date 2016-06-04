@@ -153,7 +153,7 @@ def make_step_net(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
     best_unit = fc.argmax()
     obj_act = fc[unit]
 
-  print "max: %s [%3.2f]\t obj: %s [%.2f]\t norm: [%.2f]" % (best_unit, fc[best_unit], unit, obj_act, grad_norm)
+  print "max: %3s [%.2f]\t obj: %s [%.2f]\t norm: [%.2f]" % (best_unit, fc[best_unit], unit, obj_act, grad_norm)
 
   # Make an update
   src.data[:] += step_size/np.abs(g).mean() * g
