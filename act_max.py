@@ -342,7 +342,6 @@ def main():
     print " start learning rate: %s" % args.lr
     print " end learning rate: %s" % args.end_lr
     print " seed: %s" % args.seed
-    print " total variation: %s" % args.start_tv
     print " opt_layer: %s" % args.opt_layer
     print " act_layer: %s" % args.act_layer
     print " init_file: %s" % args.init_file
