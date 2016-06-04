@@ -8,8 +8,6 @@ fi
 #start="${1}"
 #end="${start}"
 
-#cd /project/EvolvingAI/anguyen8/x/upconvnet/exp_mean_images
-
 # Go to each class directory
 # Find the cluster with the largest number of files
 dir="/home/anh/data"
@@ -80,7 +78,7 @@ for unit in ${units}; do
               --unit ${unit} --n_iters ${n_iters} \
               --end_lr ${end_lr} \
               --debug ${debug} \
-              --L2 ${L2} --lr ${lr} --seed ${seed} \
+              --L2 ${L2} --start_lr ${lr} --seed ${seed} \
               --clip ${clip} \
               --bound ${bound_file} \
               --output_dir ${output_dir}
