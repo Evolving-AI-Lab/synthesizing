@@ -43,7 +43,7 @@ We provide here four different examples:
     <img src="examples/example2.jpg" width=500px>
 </p>
 
- * These 5 random neurons are a bit boring, but you can visualize more interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as in Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or face/text detectors in CaffeNet as found in [1].
+  * These 5 random neurons are a bit boring, but you can visualize more interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as in Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or face/text detectors in CaffeNet as found in [1].
 
 [3_start_from_real_image.sh](3_start_from_real_image.sh):
 [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
