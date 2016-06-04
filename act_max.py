@@ -66,6 +66,7 @@ def get_code(path, layer):
 
   return zero_feat, data
 
+
 def make_step_generator(net, x, x0, start, end, step_size=1):
   '''
   Forward and backward passes through the generator DNN.
