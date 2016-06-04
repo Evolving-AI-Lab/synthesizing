@@ -170,12 +170,12 @@ def get_shape(data_shape):
     raise Exception("Data shape invalid.")
 
 
-def activation_maximization(net, generator, start_layer, code, phases, clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
+def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, phases, 
+      clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
 
   # Get the input and output sizes
-  output_layer = 'deconv0'
   data_shape = net.blobs['data'].data.shape
-  generator_output_shape = generator.blobs[output_layer].data.shape
+  generator_output_shape = generator.blobs[gen_out_layer].data.shape
 
   # Calculate the difference between the input image to the net being visualized
   # and the output image from the generator
@@ -188,7 +188,7 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
   print "Starting optimizing"
 
   x = None
-  src = generator.blobs[start_layer]
+  src = generator.blobs[gen_in_layer]
   
   # Make sure the layer size and initial vector size match
   assert_array_equal(src.data.shape, code.shape)
@@ -214,7 +214,7 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
       
       # 1. pass the code to generator to get an image x0
       generated = generator.forward(feat=src.data[:])
-      x0 = generated[output_layer]   # 256x256
+      x0 = generated[gen_out_layer]   # 256x256
 
       # Crop from 256x256 to 227x227
       cropped_x0 = x0.copy()[:,:,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]]
@@ -238,7 +238,7 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
       updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
       # 5. backprop the image to generator to get an updated code
-      grad_norm_generator, updated_code = make_step_generator(generator, updated_x0, x0, step_size, start=start_layer, end=output_layer)
+      grad_norm_generator, updated_code = make_step_generator(generator, updated_x0, x0, step_size, start=gen_in_layer, end=gen_out_layer)
 
       # Clipping code
       if clip:
@@ -351,12 +351,12 @@ def main():
                mean = mean, # ImageNet mean
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
-  print generator.blobs[0]
-
-  return None
+  # input / output layers in generator
+  gen_in_layer = "feat"
+  gen_out_layer = "deconv0"
 
   # shape of the code being optimized
-  shape = generator.blobs['feat'].data.shape
+  shape = generator.blobs[gen_in_layer].data.shape
 
   # Fix the seed
   np.random.seed(args.seed)
@@ -381,7 +381,7 @@ def main():
     lower_bound = np.zeros(start_code.shape)
 
   # Optimize a code via gradient ascent
-  output_image = activation_maximization(net, generator, 'feat', start_code, phases, 
+  output_image = activation_maximization(net, generator, gen_in_layer=gen_in_layer, gen_out_layer=gen_out_layer, start_code, phases, 
             clip=args.clip, unit=args.unit, xy=args.xy, debug=args.debug,
             upper_bound=upper_bound, lower_bound=lower_bound)
 
