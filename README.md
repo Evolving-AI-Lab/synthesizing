@@ -14,3 +14,9 @@ This repository contains source code necessary to reproduce some of the main res
     }
 
 For more information regarding the paper, please visit www.evolvingai.org/synthesizing
+
+## Setup
+This code is built on top of Caffe. You'll need to install the following:
+* Install Caffe; follow the official [installation instructions](http://caffe.berkeleyvision.org/installation.html).
+* Build the Python bindings for Caffe
+* If you have an NVIDIA GPU, you can optionally build Caffe with the GPU option to make it run faster
