@@ -46,12 +46,13 @@ We provide here four different examples:
 * These 5 random neurons are a bit boring, but you can visualize more interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as in Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or face/text detectors in CaffeNet as found in [1].
 
 [3_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
-* Depending on the hyperparameter settings, one could produce images near or far the initialization code.
-* Here, the `debug` option is enabled, so one can see the activations of intermediate images. The script produces:
+* Depending on the hyperparameter settings, one could produce images near or far the initialization code (e.g. ending up with a *green* pepper when starting with a red pepper).
+* The `debug` option is enabled, so one can see the activations of intermediate images. The script produces:
 
 <p align="center">
     <img src="examples/example3.jpg" width=700px>
 </p>
+<p align="center"><i>Optimization adds more green leaves and a surface below the initial pepper</i></p>
 
 
 [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
