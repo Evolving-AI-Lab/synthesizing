@@ -27,6 +27,9 @@ This code is built on top of Caffe. You'll need to install the following:
 ### Downloading models
 You will need to download a few models:
 * The image generation network (Upconvolutional network) from [3]. You can download directly on their [website](https://github.com/anguyen8/upconv_release) or using the script provided in.
+* A DNN to visualize (e.g. from Caffe software package or Caffe Model zoo). The examples below use two models:
+  * BVLC reference CaffeNet
+  * AlexNet DNN trained on MIT Places CNN
 
 ## Usage
 The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
