@@ -67,7 +67,7 @@ def get_code(path, layer):
   data -= np.expand_dims(np.transpose(image_mean, (2,0,1)), 0) # mean is already BGR
 
   #initialize the caffenet to extract the features
-  caffenet = caffe.Net(settings.encoder_definition, settings.encoder_path, caffe.TEST)
+  caffenet = caffe.Net(settings.encoder_definition, settings.encoder_weights, caffe.TEST)
 
   # run caffenet and extract the features
   caffenet.forward(data=data)
@@ -345,8 +345,8 @@ def main():
   ]
 
   # networks
-  generator = caffe.Net(settings.generator_definition, settings.generator_path, caffe.TEST)
-  net = caffe.Classifier(settings.net_definition, settings.net_path,
+  generator = caffe.Net(settings.generator_definition, settings.generator_weights, caffe.TEST)
+  net = caffe.Classifier(settings.net_definition, settings.net_weights,
                mean = mean, # ImageNet mean, training set dependent
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
