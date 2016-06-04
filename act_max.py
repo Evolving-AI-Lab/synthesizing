@@ -7,20 +7,16 @@ import site
 site.addsitedir(settings.caffe_root)
 
 # imports and basic notebook setup
-from cStringIO import StringIO
 import numpy as np
 import math
 import os,re,random
-import scipy.ndimage as nd
 import PIL.Image
 import sys, subprocess
 from IPython.display import clear_output, Image, display
 from scipy.misc import imresize
-from skimage.restoration import denoise_tv_bregman
 from numpy.linalg import norm
 from numpy.testing import assert_array_equal
-import scipy.misc
-import scipy.io
+import scipy.misc, scipy.io
 import patchShow
 
 import argparse # parsing arguments
@@ -42,8 +38,6 @@ decoder = caffe.Net(settings.decoder_definition, settings.decoder_path, caffe.TE
 encoder = caffe.Classifier(settings.encoder_definition, settings.encoder_path,
                        mean = mean, # ImageNet mean, training set dependent
                        channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
-
-layers = ['data', 'conv1', 'pool5', 'fc6', 'fc7', 'fc8']
 
 # a couple of utility functions for converting to and from Caffe's input image layout
 def preprocess(net, img):
