@@ -54,13 +54,13 @@ def get_code(path, layer):
   del matfile
   data -= np.expand_dims(np.transpose(image_mean, (2,0,1)), 0) # mean is already BGR
 
-  # initialize the caffenet to extract the features
-  caffenet = caffe.Net(settings.encoder_definition, settings.encoder_weights, caffe.TEST)
+  # initialize the encoder
+  encoder = caffe.Net(settings.encoder_definition, settings.encoder_weights, caffe.TEST)
 
-  # run caffenet and extract the features
-  caffenet.forward(data=data)
-  feat = np.copy(caffenet.blobs[layer].data)
-  del caffenet
+  # run encoder and extract the features
+  encoder.forward(data=data)
+  feat = np.copy(encoder.blobs[layer].data)
+  del encoder
 
   zero_feat = feat[0].copy()[np.newaxis]
 
