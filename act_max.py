@@ -351,6 +351,10 @@ def main():
                mean = mean, # ImageNet mean
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
+  print generator._layer_names
+
+  return None
+
   # shape of the code being optimized
   shape = generator.blobs['feat'].data.shape
 
