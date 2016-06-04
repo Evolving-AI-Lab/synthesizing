@@ -31,7 +31,7 @@ bound_file=act_range/${multiplier}x/${opt_layer}.txt
 init_file="images/cat.jpg"
 
 # Debug
-debug=0
+debug=1
 if [ "${debug}" -eq "1" ]; then
   rm -rf debug
   mkdir debug
