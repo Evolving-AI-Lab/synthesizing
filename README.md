@@ -1,4 +1,4 @@
-## Activation Maximization via Upconvolutional Networks
+## Synthesizing preferred inputs via deep generator networks
 
 This repository contains source code necessary to reproduce some of the main results in the paper:
 
