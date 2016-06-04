@@ -224,7 +224,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       grad_norm_net, x, act = make_step_net(net=net, end=layer, unit=unit, image=cropped_x0, xy=xy, step_size=step_size)
 
       # Convert from BGR to RGB
-      x = x[:,::-1, :, :]
+      # x = x[:,::-1, :, :]
 
       # Save the solution
       # Note that we're not saving the solutions with the highest activations
@@ -235,7 +235,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_c
       # 4. Place the changes in x (227x227) back to x0 (256x256)
       # Convert image from RGB back to BGR
       updated_x0 = x0.copy()        
-      updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
+      updated_x0[:,:,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
       # 5. backprop the image to generator to get an updated code
       grad_norm_generator, updated_code = make_step_generator(net=generator, x=updated_x0, x0=x0, 
