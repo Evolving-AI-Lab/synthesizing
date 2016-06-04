@@ -312,12 +312,16 @@ def main():
   parser.add_argument('--clip', metavar='b', type=int, default=0, help='Clip out within a code range')
   parser.add_argument('--bound', metavar='b', type=str, default="", help='The file to an array that is the upper bound for activation range')
   parser.add_argument('--output_dir', metavar='b', type=str, default=".", help='Output directory for saving results')
+  parser.add_argument('--net_weights', metavar='b', type=str, default=settings.net_weights, help='Weights of the net being visualized')
+  parser.add_argument('--net_definition', metavar='b', type=str, default=settings.net_definition, help='Definition of the net being visualized')
 
   args = parser.parse_args()
 
   # Default to constant learning rate
   if args.end_lr < 0:
     args.end_lr = args.start_lr
+
+
 
   # which neuron to visualize
   print "-------------"
@@ -330,10 +334,13 @@ def main():
   print " opt_layer: %s" % args.opt_layer
   print " act_layer: %s" % args.act_layer
   print " init_file: %s" % args.init_file
-  print " debug: %s" % args.debug
   print " clip: %s" % args.clip
   print " bound: %s" % args.bound
+  print "-------------"
+  print " debug: %s" % args.debug
   print " output dir: %s" % args.output_dir
+  print " net weights: %s" % args.net_weights
+  print " net definition: %s" % args.net_definition
   print "-------------"
 
   params = [
