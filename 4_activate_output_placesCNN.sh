@@ -1,9 +1,9 @@
 #/bin/bash
 
-if [ "$#" -ne "1" ]; then
-  echo "Provide 1 output unit number e.g. 8 for art gallery (MIT Places 205)."
-  exit 1
-fi
+# if [ "$#" -ne "1" ]; then
+#   echo "Provide 1 output unit number e.g. 8 for art gallery (MIT Places 205)."
+#   exit 1
+# fi
 
 # Get label for each unit
 path_labels="misc/categoryIndex_places205.txt"
