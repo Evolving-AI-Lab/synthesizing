@@ -45,6 +45,9 @@ mkdir ${output_dir}
 # Running optimization across a sweep of hyperparams
 for unit in ${units}; do
 
+  label=`echo ${labels[unit]} | cut -d " " -f 1`
+  label=${label/_/ }
+
   for seed in {0..0}; do
   #for seed in {0..8}; do
 
@@ -72,6 +75,15 @@ for unit in ${units}; do
               --init_file ${init_file} \
               --net_weights ${net_weights} \
               --net_definition ${net_definition}
+
+          # Add a category label to each image
+          unit_pad=`printf "%04d" ${unit}`
+          f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
+          convert $f -gravity south -splice 0x10 $f
+          convert $f -append -gravity Center -pointsize 30 label:"$label" -bordercolor white -border 0x0 -append $f
+
+          list_files="${list_files} ${f}"
+
         done
       done
     done
