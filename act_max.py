@@ -174,7 +174,7 @@ def save_image(img, name):
   scipy.misc.imsave(name, normalized_img)
 
 def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, phases, 
-      clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
+      clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None):
 
   # Get the input and output sizes
   data_shape = net.blobs['data'].data.shape
