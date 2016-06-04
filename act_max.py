@@ -295,6 +295,7 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
   return best_xx
 
 def write_label(filename, act):
+  # Add activation below each image via ImageMagick
   subprocess.call(["convert %s -gravity south -splice 0x10 %s" % (filename, filename)], shell=True)
   subprocess.call(["convert %s -append -gravity Center -pointsize %s label:\"%.2f\" -bordercolor white -border 0x0 -append %s" %
          (filename, 30, act, filename)], shell=True)
@@ -351,8 +352,8 @@ def main():
   ]
 
   # networks
-  generator = caffe.Net(settings.decoder_definition, settings.decoder_path, caffe.TEST)
-  net = caffe.Classifier(settings.encoder_definition, settings.encoder_path,
+  generator = caffe.Net(settings.generator_definition, settings.generator_path, caffe.TEST)
+  net = caffe.Classifier(settings.net_definition, settings.net_path,
                mean = mean, # ImageNet mean, training set dependent
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
