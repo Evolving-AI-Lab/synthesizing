@@ -281,8 +281,6 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
                 print " grad_norm_net is 0"
                 break
 
-        print "octave %d image:" % e
-
     # returning the resulting image
     print " -------------------------"
     print " Result: obj act [%s] " % best_act
