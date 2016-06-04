@@ -25,13 +25,17 @@ This code is built on top of Caffe. You'll need to install the following:
 ## Usage
 The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
 
-<img src="http://www.cs.uwyo.edu/~anguyen8/share/160531__arxiv_main_concept.jpg" width=600px>
+<p align="center">
+    <img src="http://www.cs.uwyo.edu/~anguyen8/share/160531__arxiv_main_concept.jpg" width=600px>
+</p>
 
 We provide here four different examples:
 
 * [1_activate_output.sh](1_activate_output.sh): optimizing a code to activate an output neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
-<img src="examples/example1.jpg" width=600px>
+<p align="center">
+    <img src="examples/example1.jpg" width=600px>
+</p>
 
 * [2_activate_hidden.sh](2_activate_hidden.sh):
 * [3_start_from_real_image.sh](3_start_from_real_image.sh):
