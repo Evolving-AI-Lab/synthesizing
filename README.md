@@ -29,6 +29,9 @@ The main Python file is [act_max.py](act_max.py), which is a standalone Python s
 
 We provide here four different examples:
 
-* Example 1: [1_activate_output.sh](1_activate_output.sh)
+* Example [1_activate_output.sh](1_activate_output.sh):
  * Activate 
+* Example [2_activate_hidden.sh](2_activate_hidden.sh):
+* Example [3_start_from_real_image.sh](3_start_from_real_image.sh):
+* Example [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
 
