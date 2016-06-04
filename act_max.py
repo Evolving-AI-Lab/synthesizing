@@ -258,7 +258,7 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, p
 
       # Print x every 10 iterations
       if debug:
-        print " ===== %s ===== " % i
+        print " > iter %s ===== " % i
         print_x = patchShow.patchShow(x.copy(), in_range=(-120,120))
         name = "./frames/%s.jpg" % str(i).zfill(3)
         scipy.misc.imsave(name, print_x)
