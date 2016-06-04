@@ -43,6 +43,8 @@ We provide here four different examples:
     <img src="examples/example2.jpg" width=500px>
 </p>
 
+These 5 neurons are a bit boring, but you can visualize interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or cat or text detectors in CaffeNet as found in [1].
+
 * [3_start_from_real_image.sh](3_start_from_real_image.sh):
 * [4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
 
@@ -51,3 +53,6 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 * The [image generator networks](https://arxiv.org/abs/1602.02644) are for non-commercial use only. See their [page](http://lmb.informatik.uni-freiburg.de/resources/software.php) for more.
 * See the licenses of the models that you visualize (e.g. [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf)) before use.
 
+## References
+
+ [1] J. Yosinski, J. Clune, A. Nguyen, T. Fuchs, H. Lipson H (2015) "Understanding Neural Networks Through Deep Visualization", ICML 2015 Deep Learning workshop.
