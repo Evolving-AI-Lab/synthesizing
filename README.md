@@ -31,35 +31,36 @@ The main Python file is [act_max.py](act_max.py), which is a standalone Python s
 
 We provide here four different examples:
 
-[1_activate_output.sh](1_activate_output.sh): Optimizing a code to activate an *output* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+[1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
     <img src="examples/example1.jpg" width=600px>
 </p>
 
-[2_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
+[2_activate_output_placesCNN.sh](2_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper).
+
+<p align="center">
+    <img src="examples/example2.jpg" width=600px>
+</p>
+
+[3_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
 * Depending on the hyperparameter settings, one could produce images near or far the initialization code (e.g. ending up with a *green* pepper when starting with a red pepper).
 * The `debug` option is enabled, so one can see the activations of intermediate images. The script produces:
 
 <p align="center">
-    <img src="examples/example2.jpg" width=700px>
+    <img src="examples/example3.jpg" width=700px>
 </p>
 <p align="center"><i>Optimization adds more green leaves and a surface below the initial pepper</i></p>
 
 
-[3_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh): Optimizing a code to activate an *output* neuron of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper).
-
-<p align="center">
-    <img src="examples/example3.jpg" width=600px>
-</p>
-
-[4_activate_hidden.sh](4_activate_hidden.sh): Optimizing a code to activate a *hidden* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+[4_activate_hidden.sh](4_activate_hidden.sh): Optimizing codes to activate *hidden* neurons at layer 5 of the [DeepScene DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on MIT Places dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
     <img src="examples/example4.jpg" width=500px>
 </p>
+<p align="center"><i>From left to right are units that are semantically labeled by humans as: <br/>lighthouse, building, bookcase, food, and painting </i></p>
 
-* These 5 random neurons are a bit boring, but you can visualize more interesting ones like object detectors in [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf) as in Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304), or face/text detectors in CaffeNet as found in [1].
+* This result matches the conclusion that object detectors automatically emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
@@ -68,4 +69,6 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 
 ## References
 
- [1] J. Yosinski, J. Clune, A. Nguyen, T. Fuchs, H. Lipson H (2015) "Understanding Neural Networks Through Deep Visualization", ICML 2015 Deep Learning workshop.
+[1] Yosinski J, Clune J, Nguyen A, Fuchs T, Lipson H. "Understanding Neural Networks Through Deep Visualization". ICML 2015 Deep Learning workshop.
+
+[2] Zhou B, Khosla A, Lapedriza A, Oliva A, Torralba A. "Object detectors emerge in deep scene cnns". ICLR 2015.
