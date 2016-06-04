@@ -287,10 +287,10 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
   if debug:
     print "Saving list of activations..."
     for p in list_acts:
-    name = p[0]
-    act = p[1]
+      name = p[0]
+      act = p[1]
 
-    write_label(name, act)
+      write_label(name, act)
 
   return best_xx
 
