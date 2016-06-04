@@ -55,7 +55,7 @@ We provide here four different examples:
 <p align="center"><i>Optimization adds more green leaves and a surface below the initial pepper</i></p>
 
 
-[4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh):
+[4_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh): Optimizing a code to activate an *output* neuron of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset.
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
