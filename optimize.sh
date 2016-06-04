@@ -25,7 +25,7 @@ end_lr=1e-10
 clip=0
 multiplier=3
 bound_file=act_range/${multiplier}x/${opt_layer}.txt
-init_file=""
+init_file=" "
 
 # Debug
 debug=0
