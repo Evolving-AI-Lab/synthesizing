@@ -37,21 +37,21 @@ We provide here four different examples:
     <img src="examples/example1.jpg" width=600px>
 </p>
 
-[2_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
+[2_activate_output_placesCNN.sh](2_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper).
+
+<p align="center">
+    <img src="examples/example2.jpg" width=600px>
+</p>
+
+[3_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
 * Depending on the hyperparameter settings, one could produce images near or far the initialization code (e.g. ending up with a *green* pepper when starting with a red pepper).
 * The `debug` option is enabled, so one can see the activations of intermediate images. The script produces:
 
 <p align="center">
-    <img src="examples/example2.jpg" width=700px>
+    <img src="examples/example3.jpg" width=700px>
 </p>
 <p align="center"><i>Optimization adds more green leaves and a surface below the initial pepper</i></p>
 
-
-[3_activate_output_placesCNN.sh](3_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper).
-
-<p align="center">
-    <img src="examples/example3.jpg" width=600px>
-</p>
 
 [4_activate_hidden.sh](4_activate_hidden.sh): Optimizing codes to activate *hidden* neurons at layer 5 of the [DeepScene DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on MIT Places dataset. This script synthesizes images for 5 example neurons and produces this result:
 
