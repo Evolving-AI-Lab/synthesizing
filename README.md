@@ -59,7 +59,7 @@ We provide here four different examples:
     <img src="examples/example4.jpg" width=500px>
 </p>
 
-* This result matches the finding that object detectors emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more.
+* This result matches the finding that object detectors emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
