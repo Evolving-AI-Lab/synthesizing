@@ -38,7 +38,7 @@ if [ "${debug}" -eq "1" ]; then
 fi
 
 # Output dir
-output_dir="test"
+output_dir="output"
 rm -rf ${output_dir}
 mkdir ${output_dir}
 
