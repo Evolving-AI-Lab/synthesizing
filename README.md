@@ -23,5 +23,12 @@ This code is built on top of Caffe. You'll need to install the following:
 * Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) CLI on your system
 
 ## Usage
-The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments.
+The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
+
+<img src="http://www.cs.uwyo.edu/~anguyen8/share/160531__arxiv_main_concept.jpg" width=600px>
+
+We provide here four different examples:
+
+* Example 1: `1_activate_output.sh`
+ * Activate 
 
