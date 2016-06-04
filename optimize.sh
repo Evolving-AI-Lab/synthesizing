@@ -15,7 +15,7 @@ act_layer=fc8
 units="${1}" #"643 10 304 629 945 437"
 xy=0
 
-# Hyperparam settings for AlexNet DNNs
+# Hyperparam settings for visualizing AlexNet
 iters="200"
 weights="99"
 rates="8.0"
@@ -25,10 +25,10 @@ end_lr=1e-10
 clip=0
 multiplier=3
 bound_file=act_range/${multiplier}x/${opt_layer}.txt
-init_file="images/cat.jpg"
+init_file=""
 
 # Debug
-debug=1
+debug=0
 if [ "${debug}" -eq "1" ]; then
   rm -rf debug
   mkdir debug
