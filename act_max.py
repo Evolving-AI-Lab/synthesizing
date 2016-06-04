@@ -403,7 +403,7 @@ def main():
   save_image(output_image, filename)
 
   if args.debug:
-    save_image(output_img, "./debug/%s.jpg" % str(args.n_iters).zfill(3))
+    save_image(output_image, "./debug/%s.jpg" % str(args.n_iters).zfill(3))
 
   print "Saved to %s" % filename
 
