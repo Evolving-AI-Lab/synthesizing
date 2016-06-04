@@ -390,11 +390,11 @@ def main():
     )
 
   # Save image
-  collage = patchShow.patchShow_single(output_image, in_range=(-120,120))
-  scipy.misc.imsave(filename, collage)
+  output_img = patchShow.patchShow_single(output_image, in_range=(-120,120))
+  scipy.misc.imsave(filename, output_img)
 
   if args.debug:
-    scipy.misc.imsave("./frames/%s.jpg" % str(args.n_iters).zfill(3), collage)
+    scipy.misc.imsave("./frames/%s.jpg" % str(args.n_iters).zfill(3), output_img)
 
   print "Saved to %s" % filename
 
