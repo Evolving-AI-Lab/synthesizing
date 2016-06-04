@@ -26,7 +26,7 @@ This code is built on top of Caffe. You'll need to install the following:
 
 ### Downloading models
 You will need to download a few models:
-* The image generation network (Upconvolutional network) from [3]. You can download directly on their [website](https://github.com/anguyen8/upconv_release) or using the script provided in.
+* The image generation network (Upconvolutional network) from [3]. You can download directly on their [website](https://github.com/anguyen8/upconv_release) or using the script provided `cd nets/upconv && ./download.sh`
 * A DNN to visualize (e.g. from Caffe software package or Caffe Model zoo). The examples below use two models:
   * BVLC reference [CaffeNet model](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet)
     * `cd nets/caffenet && ./download_caffenet.sh`
