@@ -26,6 +26,9 @@ conv_layers = ["conv1", "conv2", "conv3", "conv4", "conv5"]
 if settings.gpu:
   caffe.set_mode_gpu() # uncomment this if gpu processing is available
 
+# DNN being visualized
+settings.net_weights = "nets/caffenet/caffenet.caffemodel"
+settings.net_definition = "nets/caffenet/caffenet.prototxt"
 
 def get_code(path, layer):
   '''
