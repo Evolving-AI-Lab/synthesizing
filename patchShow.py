@@ -33,7 +33,7 @@ def patchShow(images, out_range=(0.,1.), in_range=None, rows=0, cols=0):
   return result
 
 
-def patchShow_single(images, out_range=(0.,1.), in_range=None, rows=0, cols=0):
+def patchShow_single(images, out_range=(0.,1.), in_range=None):
   num = images.shape[0]
   c = images.shape[1]
   ih = images.shape[2]
