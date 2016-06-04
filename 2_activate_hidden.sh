@@ -66,6 +66,7 @@ for unit in ${units}; do
               --output_dir ${output_dir} \
               --init_file ${init_file}
           
+          unit_pad=`printf "%04d" ${unit}`
           f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
           list_files="${list_files} ${f}"
 
