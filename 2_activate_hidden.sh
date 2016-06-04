@@ -68,6 +68,13 @@ for unit in ${units}; do
           
           unit_pad=`printf "%04d" ${unit}`
           f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
+
+          # Crop this image according to its receptive field size
+          size=163
+          offset=32
+          convert $f -crop ${size}x${size}+${offset}+${offset} +repage $f           
+
+          # Add to list
           list_files="${list_files} ${f}"
 
         done
