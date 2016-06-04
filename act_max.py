@@ -303,7 +303,7 @@ def main():
   parser.add_argument('--unit', metavar='unit', type=int, help='an unit to visualize e.g. [0, 999]')
   parser.add_argument('--n_iters', metavar='iter', type=int, default=10, help='Number of iterations')
   parser.add_argument('--L2', metavar='w', type=float, default=1.0, nargs='?', help='L2 weight')
-  parser.add_argument('--lr', metavar='lr', type=float, default=2.0, nargs='?', help='Learning rate')
+  parser.add_argument('--start_lr', metavar='lr', type=float, default=2.0, nargs='?', help='Learning rate')
   parser.add_argument('--end_lr', metavar='lr', type=float, default=-1.0, nargs='?', help='Ending Learning rate')
   parser.add_argument('--seed', metavar='n', type=int, default=0, nargs='?', help='Learning rate')
   parser.add_argument('--xy', metavar='n', type=int, default=0, nargs='?', help='Spatial position for conv units')
@@ -319,14 +319,14 @@ def main():
 
   # Default to constant learning rate
   if args.end_lr < 0:
-    args.end_lr = args.lr
+    args.end_lr = args.start_lr
 
   # which neuron to visualize
   print "-------------"
   print " unit: %s  xy: %s" % (args.unit, args.xy)
   print " n_iters: %s" % args.n_iters
   print " L2 weight: %s" % args.L2
-  print " start learning rate: %s" % args.lr
+  print " start learning rate: %s" % args.start_lr
   print " end learning rate: %s" % args.end_lr
   print " seed: %s" % args.seed
   print " opt_layer: %s" % args.opt_layer
@@ -343,7 +343,7 @@ def main():
       'layer': args.act_layer,
       'iter_n': args.n_iters,
       'L2_weight': args.L2,
-      'start_step_size': args.lr,
+      'start_step_size': args.start_lr,
       'end_step_size': args.end_lr
     }
   ]
@@ -395,7 +395,7 @@ def main():
       str(args.unit).zfill(4), 
       str(args.n_iters).zfill(2), 
       args.L2, 
-      args.lr,
+      args.start_lr,
       args.seed
     )
 
