@@ -8,8 +8,12 @@
 
 opt_layer=fc6
 act_layer=conv5
-units="15 20 27 55 85" #"${1}"
+units="8 55 154 181 45" #"${1}"
 xy=6  # spatial location (6, 6)
+
+# Net
+net_weights="nets/placesCNN/places205CNN_iter_300000.caffemodel"
+net_definition="nets/placesCNN/places205CNN_deploy.prototxt"
 
 # Hyperparam settings for visualizing AlexNet
 iters="200"
