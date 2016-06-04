@@ -44,8 +44,6 @@ list_files=""
 # Sweeping across hyperparams
 for unit in ${units}; do
 
-  unit_pad=`printf "%04d" ${unit}`
-
   # Get label for each unit
   label_1=`echo ${labels[unit]} | cut -d "," -f 1 | cut -d " " -f 2`
   label_2=`echo ${labels[unit]} | cut -d "," -f 1 | cut -d " " -f 3`
@@ -78,6 +76,7 @@ for unit in ${units}; do
               --init_file ${init_file}
 
           # Add a category label to each image
+          unit_pad=`printf "%04d" ${unit}`
           f=${output_dir}/${act_layer}_${unit_pad}_${n_iters}_${L2}_${lr}__${seed}.jpg
           convert $f -gravity south -splice 0x10 $f
           convert $f -append -gravity Center -pointsize 30 label:"$label" -bordercolor white -border 0x0 -append $f
