@@ -381,7 +381,7 @@ def main():
     lower_bound = np.zeros(start_code.shape)
 
   # Optimize a code via gradient ascent
-  output_image = activation_maximization(net, generator, gen_in_layer=gen_in_layer, gen_out_layer=gen_out_layer, start_code, phases, 
+  output_image = activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_code, phases, 
             clip=args.clip, unit=args.unit, xy=args.xy, debug=args.debug,
             upper_bound=upper_bound, lower_bound=lower_bound)
 
