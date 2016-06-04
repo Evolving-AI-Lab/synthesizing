@@ -7,7 +7,7 @@
 #fi
 
 # Get label for each unit
-path_labels="synset_words.txt"
+path_labels="misc/synset_words.txt"
 IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
