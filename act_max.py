@@ -379,15 +379,17 @@ def main():
     else:
         start_code = np.random.normal(0, 1, shape)
 
-    n_units = shape[1]
+    
 
     # Load the activation range
     upper_bound = lower_bound = None
 
     if args.bound != "":
-      #act_range_file = "/home/anh/workspace/upconvnet/act_range_3x/fc6.txt"
+      n_units = shape[1]
       upper_bound = np.loadtxt(args.bound, delimiter=' ', usecols=np.arange(0, n_units), unpack=True)
       upper_bound = upper_bound.reshape(start_code.shape)
+
+      # Lowerbound of 0 due to ReLU
       lower_bound = np.zeros(start_code.shape)
 
     # generate class visualization via octavewise gradient ascent
