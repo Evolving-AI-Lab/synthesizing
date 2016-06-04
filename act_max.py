@@ -78,22 +78,20 @@ def get_code(path, layer):
 
     return zero_feat, data
 
-def make_step_decoder(net, x, x0, step_size=1.5, start='pool5', end='fc8'):
+def make_step_generator(net, x, x0, step_size=1.5, start='pool5', end='fc8'):
     '''Basic gradient ascent step.'''
 
     src = net.blobs[start] # input image is stored in Net's 'data' blob
     dst = net.blobs[end]
 
     # L2 distance between init and target vector
-    # Equation (2) in "Visualizing Deep Convolutional Neural Networks Using Natural Pre-Images"
-    # http://arxiv.org/pdf/1512.02017.pdf 
     net.blobs[end].diff[...] = (x-x0)
-    net.backward(start=end) # back-propagate the inner-product gradient
+    net.backward(start=end)
     g = net.blobs[start].diff.copy()
 
     # print "g:", g.shape
     grad_norm = norm(g)
-    # print " norm decoder: %s" % grad_norm
+    # print " norm generator: %s" % grad_norm
     # print "max: %s [%.2f]\t obj: %s [%.2f]\t norm: [%.2f]" % (best_unit, fc[best_unit], unit, obj_act, grad_norm)
 
     # If norm is Nan, skip updating the image
@@ -112,7 +110,7 @@ def make_step_decoder(net, x, x0, step_size=1.5, start='pool5', end='fc8'):
     return grad_norm, src.data[:].copy()
 
 
-def make_step_encoder(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
+def make_step_net(net, image, xy=0, step_size=1.5, end='fc8', unit=None):
     '''Basic gradient ascent step.'''
 
     src = net.blobs['data'] # input image is stored in Net's 'data' blob
@@ -179,12 +177,12 @@ def get_shape(data_shape):
     return size
 
 
-def activation_maximization(encoder, decoder, start_layer, code, octaves, clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
+def activation_maximization(net, generator, start_layer, code, phases, clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None, **step_params):
 
     # Get the input and output sizes
     output_layer = 'deconv0'
-    data_shape = encoder.blobs['data'].data.shape
-    output_shape = decoder.blobs[output_layer].data.shape
+    data_shape = net.blobs['data'].data.shape
+    output_shape = generator.blobs[output_layer].data.shape
 
     image_size = get_shape(data_shape)
     output_size = get_shape(output_shape)
@@ -195,7 +193,7 @@ def activation_maximization(encoder, decoder, start_layer, code, octaves, clip=F
     print "starting optimizing"
 
     x = None
-    src = decoder.blobs[start_layer]
+    src = generator.blobs[start_layer]
     
     # Make sure the layer size and initial vector size match
     assert_array_equal(src.data.shape, code.shape)
@@ -211,7 +209,7 @@ def activation_maximization(encoder, decoder, start_layer, code, octaves, clip=F
     # Save the activation of each image generated
     list_acts = []
 
-    for e,o in enumerate(octaves):
+    for o in phases:
         
         # select layer
         layer = o['layer']
@@ -220,40 +218,39 @@ def activation_maximization(encoder, decoder, start_layer, code, octaves, clip=F
 
             step_size = o['start_step_size'] + ((o['end_step_size'] - o['start_step_size']) * i) / o['iter_n']
             
-            # 1. pass the pool5 code to decoder to get an image x0
-            generated = decoder.forward(feat=src.data[:])
+            # 1. pass the code to generator to get an image x0
+            generated = generator.forward(feat=src.data[:])
             x0 = generated[output_layer]   # 256x256
 
             # Crop from 256x256 to 227x227
             cropped_x0 = x0.copy()[:,:,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]]
 
-            # 2. pass the image x0 to AlexNet to maximize an unit k
-            # 3. backprop the activation from AlexNet to the image to get an updated image x
-            grad_norm_encoder, x, act = make_step_encoder(encoder, cropped_x0, xy, step_size, end=layer, unit=unit)
-            # Convert from BGR to RGB because TV works in RGB
+            # 2. forward pass the image x0 to net to maximize an unit k
+            # 3. backprop the gradient from net to the image to get an updated image x
+            grad_norm_net, x, act = make_step_net(net, cropped_x0, xy, step_size, end=layer, unit=unit)
+
+            # Convert from BGR to RGB
             x = x[:,::-1, :, :]
 
-            # Save this solution if the activation is the highest
-            if act > best_act:
-              # Don't need to save the highest act
-              best_xx = x.copy()
-              best_act = act
+            # Save the solution
+            # Note that we purposely don't save solutions of the highest act
+            # Because there is no correlation between activation and recognizability
+            best_xx = x.copy()
+            best_act = act
 
             # 4. Place the changes in x (227x227) back to x0 (256x256)
-            updated_x0 = x0.copy()
-            # Crop and convert image from RGB back to BGR
+            # Convert image from RGB back to BGR
+            updated_x0 = x0.copy()            
             updated_x0[:,::-1,topleft[0]:topleft[0]+image_size[0], topleft[1]:topleft[1]+image_size[1]] = x.copy()
 
-            # 5. backprop the image to encoder to get an updated pool5 code
-            grad_norm_decoder, updated_code = make_step_decoder(decoder, updated_x0, x0, step_size, start=start_layer, end=output_layer)
+            # 5. backprop the image to generator to get an updated code
+            grad_norm_generator, updated_code = make_step_generator(generator, updated_x0, x0, step_size, start=start_layer, end=output_layer)
 
             if clip:
               # VAE prior is N(0,1)
-              print "clipping ----"
               updated_code = np.clip(updated_code, a_min=-1, a_max=1)
 
             elif upper_bound != None:
-              print "bounding ----"
               updated_code = np.maximum(updated_code, lower_bound) 
               updated_code = np.minimum(updated_code, upper_bound) 
 
@@ -271,19 +268,17 @@ def activation_maximization(encoder, decoder, start_layer, code, octaves, clip=F
     
                 print "code --- min: %s -- max: %s" % (np.min(updated_code), np.max(updated_code))
             
-            if i % 10 == 0:
-                print 'finished step %d in octave %d' % (i,e)
-           
-            # L2 decay: trying to make the feature vector smaller every iteration
+            # L2 on code
+            # Trying to make the feature vector smaller every iteration
             if o['L2_weight'] > 0 and o['L2_weight'] < 1:
                 src.data[:] *= o['L2_weight']
 
             # Stop if grad is 0
-            if grad_norm_decoder == 0:
-                print " grad_norm_decoder is 0"
+            if grad_norm_generator == 0:
+                print " grad_norm_generator is 0"
                 break
-            elif grad_norm_encoder == 0:
-                print " grad_norm_encoder is 0"
+            elif grad_norm_net == 0:
+                print " grad_norm_net is 0"
                 break
 
         print "octave %d image:" % e
@@ -351,7 +346,7 @@ def main():
     print " output dir: %s" % args.output_dir
     print "-------------"
 
-    octaves = [
+    phases = [
         {
             'layer': args.act_layer,
             'iter_n': args.n_iters,
@@ -362,12 +357,12 @@ def main():
     ]
 
     # networks
-    decoder = caffe.Net(settings.decoder_definition, settings.decoder_path, caffe.TEST)
-    encoder = caffe.Classifier(settings.encoder_definition, settings.encoder_path,
+    generator = caffe.Net(settings.decoder_definition, settings.decoder_path, caffe.TEST)
+    net = caffe.Classifier(settings.encoder_definition, settings.encoder_path,
                            mean = mean, # ImageNet mean, training set dependent
                            channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
-    shape = decoder.blobs['feat'].data.shape
+    shape = generator.blobs['feat'].data.shape
 
     # Fix the seed
     np.random.seed(args.seed)
@@ -378,8 +373,6 @@ def main():
         print "Loaded start code: ", start_code.shape
     else:
         start_code = np.random.normal(0, 1, shape)
-
-    
 
     # Load the activation range
     upper_bound = lower_bound = None
@@ -393,7 +386,7 @@ def main():
       lower_bound = np.zeros(start_code.shape)
 
     # generate class visualization via octavewise gradient ascent
-    output_image = activation_maximization(encoder, decoder, 'feat', start_code, octaves, 
+    output_image = activation_maximization(net, generator, 'feat', start_code, phases, 
                         clip=args.clip, unit=args.unit, xy=args.xy, debug=args.debug,
                         upper_bound=upper_bound, lower_bound=lower_bound)
 
