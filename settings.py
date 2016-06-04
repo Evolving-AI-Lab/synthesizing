@@ -2,6 +2,7 @@ caffe_root = "/home/anh/src/caffe_latest/python"
 gpu = True
 
 # DNN being visualized
+# These two settings are default, and can be overriden in the act_max.py
 net_weights = "nets/caffenet/caffenet.caffemodel"
 net_definition = "nets/caffenet/caffenet.prototxt"
 
