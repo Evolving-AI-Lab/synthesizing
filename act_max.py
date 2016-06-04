@@ -355,7 +355,7 @@ def main():
 
   # networks
   generator = caffe.Net(settings.generator_definition, settings.generator_weights, caffe.TEST)
-  net = caffe.Classifier(settings.net_definition, settings.net_weights,
+  net = caffe.Classifier(args.net_definition, args.net_weights,
                mean = mean, # ImageNet mean
                channel_swap = (2,1,0)) # the reference model has channels in BGR order instead of RGB
 
