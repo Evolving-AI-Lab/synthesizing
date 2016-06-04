@@ -20,4 +20,4 @@ This code is built on top of Caffe. You'll need to install the following:
 * Install Caffe; follow the official [installation instructions](http://caffe.berkeleyvision.org/installation.html).
 * Build the Python bindings for Caffe
 * If you have an NVIDIA GPU, you can optionally build Caffe with the GPU option to make it run faster
-* Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) on your system
+* Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) CLI on your system
