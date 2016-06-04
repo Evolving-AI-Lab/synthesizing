@@ -1,7 +1,7 @@
 #/bin/bash
 
 if [ "$#" -ne "1" ]; then
-  echo "Missing 1 arg."
+  echo "Provide 1 output unit number e.g. 945 for bell pepper)."
   exit 1
 fi
 
