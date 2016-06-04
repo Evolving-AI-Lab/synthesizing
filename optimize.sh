@@ -12,8 +12,7 @@ IFS=$'\n' read -d '' -r -a labels < ${path_labels}
 
 opt_layer=fc6
 act_layer=fc8
-#units="643 10 304 629 945 437 613 846 842 977 626 736 440 531 770 836 899 779 282 162"
-units="${1}"
+units="${1}" #"643 10 304 629 945 437"
 xy=0
 
 # Hyperparam settings for AlexNet DNNs
