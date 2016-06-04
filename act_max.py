@@ -182,7 +182,7 @@ def save_image(img, name):
   scipy.misc.imsave(name, normalized_img)
 
 
-def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, phases, 
+def activation_maximization(net, generator, gen_in_layer, gen_out_layer, start_code, phases, 
       clip=False, debug=False, unit=None, xy=0, upper_bound=None, lower_bound=None):
 
   # Get the input and output sizes
@@ -203,10 +203,10 @@ def activation_maximization(net, generator, gen_in_layer, gen_out_layer, code, p
   src = generator.blobs[gen_in_layer]
   
   # Make sure the layer size and initial vector size match
-  assert_array_equal(src.data.shape, code.shape)
+  assert_array_equal(src.data.shape, start_code.shape)
 
   # Take the starting code as the input to the generator
-  src.data[:] = code.copy()[:]
+  src.data[:] = start_code.copy()[:]
 
   # Initialize an empty result
   best_xx = np.zeros(image_size)[np.newaxis]
