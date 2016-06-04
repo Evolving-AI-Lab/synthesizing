@@ -250,7 +250,7 @@ def activation_maximization(net, generator, start_layer, code, phases, clip=Fals
               # VAE prior is N(0,1)
               updated_code = np.clip(updated_code, a_min=-1, a_max=1)
 
-            elif upper_bound != None:
+            elif upper_bound is not None:
               updated_code = np.maximum(updated_code, lower_bound) 
               updated_code = np.minimum(updated_code, upper_bound) 
 
