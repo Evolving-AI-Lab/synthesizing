@@ -73,6 +73,8 @@ for unit in ${units}; do
           size=163
           offset=32
           convert $f -crop ${size}x${size}+${offset}+${offset} +repage $f           
+          convert $f -gravity south -splice 0x10 $f
+          convert $f -append -gravity Center -pointsize 30 label:"${unit}" -bordercolor white -border 0x0 -append $f
 
           # Add to list
           list_files="${list_files} ${f}"
