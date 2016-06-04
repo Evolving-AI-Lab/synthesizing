@@ -43,7 +43,7 @@ def get_code(path, layer):
   for ni in range(images.shape[0]):
     images[ni] = np.transpose(in_image, (2, 0, 1))
 
-  # RGB to BGR, because this is what the net wants as input
+  # Convert from RGB to BGR
   data = images[:,::-1] 
 
   # subtract the ImageNet mean
@@ -54,7 +54,7 @@ def get_code(path, layer):
   del matfile
   data -= np.expand_dims(np.transpose(image_mean, (2,0,1)), 0) # mean is already BGR
 
-  #initialize the caffenet to extract the features
+  # initialize the caffenet to extract the features
   caffenet = caffe.Net(settings.encoder_definition, settings.encoder_weights, caffe.TEST)
 
   # run caffenet and extract the features
