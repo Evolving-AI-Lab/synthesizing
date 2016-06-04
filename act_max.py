@@ -8,8 +8,7 @@ site.addsitedir(settings.caffe_root)
 import caffe
 
 import numpy as np
-import math
-import random
+import math, random
 import sys, subprocess
 from IPython.display import clear_output, Image, display
 from scipy.misc import imresize
