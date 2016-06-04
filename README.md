@@ -31,7 +31,7 @@ The main Python file is [act_max.py](act_max.py), which is a standalone Python s
 
 We provide here four different examples:
 
-[1_activate_output.sh](1_activate_output.sh): Optimizing a code to activate an *output* neuron of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
+[1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
 <p align="center">
     <img src="examples/example1.jpg" width=600px>
@@ -47,7 +47,7 @@ We provide here four different examples:
 <p align="center"><i>Optimization adds more green leaves and a surface below the initial pepper</i></p>
 
 
-[3_activate_output_placesCNN.sh](4_activate_output_placesCNN.sh): Optimizing a code to activate an *output* neuron of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper).
+[3_activate_output_placesCNN.sh](3_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper).
 
 <p align="center">
     <img src="examples/example3.jpg" width=600px>
@@ -58,7 +58,7 @@ We provide here four different examples:
 <p align="center">
     <img src="examples/example4.jpg" width=500px>
 </p>
-<p align="center"><i>From left to right are units that are semantically labeled by humans as: lighthouse, building, bookcase, food, and painting </i></p>
+<p align="center"><i>From left to right are units that are semantically labeled by humans as: <br/>lighthouse, building, bookcase, food, and painting </i></p>
 
 * This result matches the conclusion that object detectors automatically emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
 
