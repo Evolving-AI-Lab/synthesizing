@@ -26,20 +26,21 @@ This code is built on top of Caffe. You'll need to install the following:
 
 ### Downloading models
 You will need to download a few models:
-* The image generation network (Upconvolutional network) from [3]. You can download directly on their [website](https://github.com/anguyen8/upconv_release) or using the script provided `cd nets/upconv && ./download.sh`
-* A DNN to visualize (e.g. from Caffe software package or Caffe Model zoo). The examples below use two models:
+* The image generation network (Upconvolutional network) from [3]. You can download directly on their [website](https://github.com/anguyen8/upconv_release) or using the script provided `cd nets/upconv/fc6 && ./download.sh`
+* A DNN to visualize (e.g. from Caffe software package or Caffe Model zoo). The below provided examples use two models:
   * BVLC reference [CaffeNet model](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet)
-    * `cd nets/caffenet && ./download_caffenet.sh`
+    * `cd nets/caffenet && ./download.sh`
   * AlexNet DNN trained on MIT Places CNN
+    * `cd nets/placesCNN && ./download.sh`
 
 ## Usage
-The main Python file is [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
+The main algorithm is in [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
 
 <p align="center">
     <img src="http://www.cs.uwyo.edu/~anguyen8/share/160531__arxiv_main_concept.jpg" width=600px>
 </p>
 
-We provide here four different examples:
+We provide here four different examples as a starting point. Feel free to be creative and fork away to produce even cooler results!
 
 [1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
