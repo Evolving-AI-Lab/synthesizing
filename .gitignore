@@ -1,5 +1,7 @@
 # Caffe models
 *.caffemodel
+*.zip
+*.gz
 
 # Images
 *.JPEG
