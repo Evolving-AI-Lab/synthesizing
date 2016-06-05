@@ -39,7 +39,7 @@ The main algorithm is in [act_max.py](act_max.py), which is a standalone Python 
     <img src="http://www.cs.uwyo.edu/~anguyen8/share/160531__arxiv_main_concept.jpg" width=600px>
 </p>
 
-We provide here four different examples as a starting point. Please be creative and fork away to produce cooler stuff!
+We provide here four different examples as a starting point. Feel free to be creative and fork away to produce even cooler results!
 
 [1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons and produces this result:
 
