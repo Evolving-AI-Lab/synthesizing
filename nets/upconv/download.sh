@@ -1,4 +1,18 @@
 #!/bin/bash
+# The following script downloads models made available by the Computer Vision group at University of Freiburg
+# http://lmb.informatik.uni-freiburg.de/resources/software.php
+
+# Models are from this paper:
+# Dosovitskiy A, Brox T. "Generating images with perceptual similarity metrics based on deep networks". 
+# arXiv preprint arXiv:1602.02644. 2016
+
+# Please check their page for licenses and info
+
+# --- Terms of use ---
+# All code is provided for research purposes only and without any warranty. 
+# Any commercial use requires our consent. When using the code in your research work, 
+# you should cite the respective paper. Refer to the readme file in each package to learn how to use the program.
+
 f=release_deepsim_v0.zip
 
 if [ ! -f "${f}" ]; then
