@@ -1,5 +1,4 @@
-The provided `download.sh` script downloads models that are made available by the Computer Vision group at University of Freiburg
-[http://lmb.informatik.uni-freiburg.de/resources/software.php](http://lmb.informatik.uni-freiburg.de/resources/software.php)
+The provided `download.sh` script downloads models that are made available by the [Computer Vision group at University of Freiburg](http://lmb.informatik.uni-freiburg.de/resources/software.php)
 
 Models are from this paper:
 
