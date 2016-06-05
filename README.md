@@ -22,6 +22,7 @@ This code is built on top of Caffe. You'll need to install the following:
 * Install Caffe; follow the official [installation instructions](http://caffe.berkeleyvision.org/installation.html).
 * Build the Python bindings for Caffe
 * If you have an NVIDIA GPU, you can optionally build Caffe with the GPU option to make it run faster
+* Make sure the path to your `caffe/python` folder in [settings.py](settings.py) is correct
 * Install [ImageMagick](http://www.imagemagick.org/script/binary-releases.php) command-line interface on your system.
 
 ### Downloading models
@@ -30,6 +31,8 @@ You will need to download a few models. There are `download.sh` scripts provided
 * A network being visualized (e.g. from Caffe software package or Caffe Model Zoo). The below provided examples use two models:
   * [BVLC reference CaffeNet CNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet): `cd nets/caffenet && ./download.sh`
   * [AlexNet CNN trained on MIT Places dataset](http://places.csail.mit.edu/): `cd nets/placesCNN && ./download.sh`
+
+Paths to the downloaded models are in [settings](settings.py). They are relative and should work if the `download.sh` scripts run correctly.
 
 ## Usage
 The main algorithm is in [act_max.py](act_max.py), which is a standalone Python script; you can pass various command-line arguments to run different experiments. Basically, to synthesize a preferred input for a target neuron *h* (e.g. the “candle” class output neuron), we optimize the hidden code input (red) of a [deep image generator network](https://arxiv.org/abs/1602.02644) to produce an image that highly activates *h*.
