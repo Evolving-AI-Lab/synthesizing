@@ -40,13 +40,15 @@ The main algorithm is in [act_max.py](act_max.py), which is a standalone Python 
 
 We provide here four different examples as a starting point. Feel free to be creative and fork away to produce even cooler results!
 
-[1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons. Running `./1_activate_output.sh` produces this result:
+[1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons. 
+* Running `./1_activate_output.sh` produces this result:
 
 <p align="center">
     <img src="examples/example1.jpg" width=600px>
 </p>
 
-[2_activate_output_placesCNN.sh](2_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper). Running `./2_activate_output_placesCNN.sh` produces this result:
+[2_activate_output_placesCNN.sh](2_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in our paper). 
+* Running `./2_activate_output_placesCNN.sh` produces this result:
 
 <p align="center">
     <img src="examples/example2.jpg" width=600px>
@@ -63,7 +65,8 @@ We provide here four different examples as a starting point. Feel free to be cre
 <p align="center"><i>Optimization adds more green leaves and a surface below the initial pepper</i></p>
 
 
-[4_activate_hidden.sh](4_activate_hidden.sh): Optimizing codes to activate *hidden* neurons at layer 5 of the [DeepScene DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on MIT Places dataset. This script synthesizes images for 5 example neurons. Running `./4_activate_hidden.sh` produces this result:
+[4_activate_hidden.sh](4_activate_hidden.sh): Optimizing codes to activate *hidden* neurons at layer 5 of the [DeepScene DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on MIT Places dataset. This script synthesizes images for 5 example neurons. 
+* Running `./4_activate_hidden.sh` produces this result:
 
 <p align="center">
     <img src="examples/example4.jpg" width=500px>
