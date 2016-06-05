@@ -86,7 +86,7 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 * See the licenses of the models that you visualize (e.g. [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf)) before use.
 
 ## Questions?
-Please feel free to drop [me](http://anhnguyen.me) a line or create github issues if you have questions.
+Please feel free to drop [me](http://anhnguyen.me) a line or create github issues if you have questions/suggestions.
 
 ## References
 
