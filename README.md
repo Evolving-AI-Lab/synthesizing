@@ -56,7 +56,7 @@ We provide here four different examples as a starting point. Feel free to be cre
 
 [3_start_from_real_image.sh](3_start_from_real_image.sh): Instead of starting from a random code, this example starts from a code of a real image (here, an image of a red bell pepper) and optimizes it to increase the activation of the "bell pepper" neuron. 
 * Depending on the hyperparameter settings, one could produce images near or far the initialization code (e.g. ending up with a *green* pepper when starting with a red pepper).
-* The `debug` option is enabled, so one can see the activations of intermediate images.
+* The `debug` option in the script is enabled in the, so one can visualize the activations of intermediate images.
 * Running `./3_start_from_real_image.sh` produces this result:
 
 <p align="center">
