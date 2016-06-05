@@ -43,6 +43,7 @@ The main algorithm is in [act_max.py](act_max.py), which is a standalone Python 
     <img src="http://www.cs.uwyo.edu/~anguyen8/share/160531__arxiv_main_concept.jpg" width=600px>
 </p>
 
+### Examples
 We provide here four different examples as a starting point. Feel free to be creative and fork away to produce even cooler results!
 
 [1_activate_output.sh](1_activate_output.sh): Optimizing codes to activate *output* neurons of the [CaffeNet DNN](https://github.com/BVLC/caffe/tree/master/models/bvlc_reference_caffenet) trained on ImageNet dataset. This script synthesizes images for 5 example neurons. 
@@ -79,6 +80,13 @@ We provide here four different examples as a starting point. Feel free to be cre
 <p align="center"><i>From left to right are units that are semantically labeled by humans in [2] as: <br/>lighthouse, building, bookcase, food, and painting </i></p>
 
 * This result matches the conclusion that object detectors automatically emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
+
+
+### Visualizing your own models
+* To visualize your own model you should search for the hyperparameter setting that works for your model.
+One simple way to do this is sweeping across different dimensions (see code setup in the provided example bash scripts).
+The hyperparam setting in the provided examples should work for AlexNet DNN trained on different datasets.
+* For even better result, one can train an image generator network to invert features from the model being visualized instead of using the provided generator (which is trained to invert CaffeNet). However, training such generator may not be easy for many reasons (e.g. inverting very deep nets like ResNet).
 
 ## Licenses
 Note that the code in this repository is licensed under MIT License, but, the pre-trained models used by the code have their own licenses. Please carefully check them before use.
