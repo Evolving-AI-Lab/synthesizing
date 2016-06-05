@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+'''
+Anh Nguyen <anh.ng8@gmail.com>
+2016-06-04
+'''
 import os
 os.environ['GLOG_minloglevel'] = '2'  # suprress Caffe verbose prints
 
