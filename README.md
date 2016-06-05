@@ -71,7 +71,7 @@ We provide here four different examples as a starting point. Feel free to be cre
 <p align="center">
     <img src="examples/example4.jpg" width=500px>
 </p>
-<p align="center"><i>From left to right are units that are semantically labeled by humans as: <br/>lighthouse, building, bookcase, food, and painting </i></p>
+<p align="center"><i>From left to right are units that are semantically labeled by humans in [2] as: <br/>lighthouse, building, bookcase, food, and painting </i></p>
 
 * This result matches the conclusion that object detectors automatically emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
 
