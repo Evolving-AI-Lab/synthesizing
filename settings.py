@@ -1,4 +1,4 @@
-caffe_root = "/home/anh/src/caffe_latest/python" 
+caffe_root = "/path/to/your/caffe/python" 
 gpu = True
 
 # DNN being visualized
