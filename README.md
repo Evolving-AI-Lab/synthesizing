@@ -52,7 +52,7 @@ We provide here four different examples as a starting point. Feel free to be cre
     <img src="examples/example1.jpg" width=600px>
 </p>
 
-[2_activate_output_placesCNN.sh](2_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality degrades (see Sec. 3.3 in [our paper](http://arxiv.org/abs/1605.09304)). 
+[2_activate_output_placesCNN.sh](2_activate_output_placesCNN.sh): Optimizing codes to activate *output* neurons of a different network, here [AlexNet DNN](http://places.csail.mit.edu/) trained on [MIT Places205](http://places.csail.mit.edu/) dataset. The prior used here produces the best images for visualizing AlexNet models, it also works on other models but the image quality might degrade (see Sec. 3.3 in [our paper](http://arxiv.org/abs/1605.09304)). 
 * Running `./2_activate_output_placesCNN.sh` produces this result:
 
 <p align="center">
