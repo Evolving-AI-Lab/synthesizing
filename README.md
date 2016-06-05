@@ -76,6 +76,9 @@ Note that the code in this repository is licensed under MIT License, but, the pr
 * The [image generator networks](https://arxiv.org/abs/1602.02644) are for non-commercial use only. See their [page](http://lmb.informatik.uni-freiburg.de/resources/software.php) for more.
 * See the licenses of the models that you visualize (e.g. [DeepScene CNN](https://people.csail.mit.edu/khosla/papers/iclr2015_zhou.pdf)) before use.
 
+## Questions?
+Please feel free to drop [me](anh.ng8@gmail.com) a line or create github issues if you have questions.
+
 ## References
 
 [1] Yosinski J, Clune J, Nguyen A, Fuchs T, Lipson H. "Understanding Neural Networks Through Deep Visualization". ICML 2015 Deep Learning workshop.
