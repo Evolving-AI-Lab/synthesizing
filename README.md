@@ -81,6 +81,12 @@ We provide here four different examples as a starting point. Feel free to be cre
 
 * This result matches the conclusion that object detectors automatically emerge in a DNN trained to classify images of places [2]. See Fig. 6 in [our paper](http://arxiv.org/abs/1605.09304) for more comparison between these images and visualizations produced by [2].
 
+[5_activate_output_GoogLeNet.sh](5_activate_output_GoogLeNet.sh): Here is an example of activating the output neurons of a different architecture, GoogLeNet, trained on ImageNet. Note that the *learning rate* used in this example is different from that in the example 1 and 2 above.
+* Running `./5_activate_output_GoogLeNet.sh` produces this result:
+
+<p align="center">
+    <img src="examples/example5.jpg" width=700px>
+</p>
 
 ### Visualizing your own models
 * To visualize your own model you should search for the hyperparameter setting that works for your model.
