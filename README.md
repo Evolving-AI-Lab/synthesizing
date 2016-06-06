@@ -91,7 +91,6 @@ We provide here four different examples as a starting point. Feel free to be cre
 ### Visualizing your own models
 * To visualize your own model you should search for the hyperparameter setting that produces the best images for your model.
 One simple way to do this is sweeping across different parameters (see code setup in the provided example bash scripts).
-The hyperparam setting in the provided examples should work for AlexNet DNN trained on different datasets.
 * For even better result, one can train an image generator network to invert features from the model being visualized instead of using the provided generator (which is trained to invert CaffeNet). However, training such generator may not be easy for many reasons (e.g. inverting very deep nets like ResNet).
 
 ## Licenses
