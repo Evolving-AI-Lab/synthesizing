@@ -19,7 +19,8 @@ xy=0
 net_weights="nets/googlenet/bvlc_googlenet.caffemodel"
 net_definition="nets/googlenet/bvlc_googlenet_updated.prototxt"
 
-# Hyperparam settings for visualizing AlexNet
+# Hyperparam settings for visualizing GoogLeNet
+# Note that the learnign rate is different from that for AlexNet
 iters="200"
 weights="99"
 rates="2.0"
