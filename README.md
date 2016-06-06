@@ -85,7 +85,7 @@ We provide here four different examples as a starting point. Feel free to be cre
 * Running `./5_activate_output_GoogLeNet.sh` produces this result:
 
 <p align="center">
-    <img src="examples/example5.jpg" width=700px>
+    <img src="examples/example5.jpg" width=600px>
 </p>
 
 ### Visualizing your own models
