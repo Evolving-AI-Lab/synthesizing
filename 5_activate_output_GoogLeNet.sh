@@ -101,4 +101,4 @@ output_file=${output_dir}/example5.jpg
 montage ${list_files} -tile 5x1 -geometry +1+1 ${output_file}
 convert ${output_file} -trim ${output_file}
 echo "=============================="
-echo "Result of example 1: [ ${output_file} ]"
+echo "Result of example 5: [ ${output_file} ]"
