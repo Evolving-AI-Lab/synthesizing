@@ -15,8 +15,9 @@
 
 f=release_deepsim_v0.zip
 
-if [ ! -f "${f}" ]; then
-  wget http://lmb.informatik.uni-freiburg.de/resources/binaries/arxiv2016_alexnet_inversion_with_gans/release_deepsim_v0.zip
+if [ ! -f "${f}" ]; then  
+  wget https://lmb.informatik.uni-freiburg.de/resources/binaries/arxiv2016_alexnet_inversion_with_gans/release_deepsim_v0.zip
+  # wget http://s.anhnguyen.me/release_deepsim_v0.zip  # Alternative link
 fi
 
 echo "Extracting..."
