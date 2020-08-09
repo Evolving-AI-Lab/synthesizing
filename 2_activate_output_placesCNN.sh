@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/env bash
 
 # if [ "$#" -ne "1" ]; then
 #   echo "Provide 1 output unit number e.g. 8 for art gallery (MIT Places 205)."

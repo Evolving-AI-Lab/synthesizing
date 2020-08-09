@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/env bash
 
 opt_layer=fc6
 act_layer=fc8

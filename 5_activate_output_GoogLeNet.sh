@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/env bash
 
 # Take in an unit number
 #if [ "$#" -ne "1" ]; then
